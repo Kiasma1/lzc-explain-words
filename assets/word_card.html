@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Mastery: {{WORD}}</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #f5f7fb;
+    --bg-accent: radial-gradient(circle at top left, rgba(29, 78, 216, 0.08), transparent 32%),
+                 radial-gradient(circle at top right, rgba(190, 24, 93, 0.08), transparent 28%),
+                 linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    --surface: rgba(255, 255, 255, 0.84);
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-soft: #374151;
+    --text-muted: #6b7280;
+    --border-color: rgba(17, 24, 39, 0.08);
+    --shadow-soft: 0 12px 32px rgba(15, 23, 42, 0.08);
+    --shadow-hover: 0 18px 40px rgba(15, 23, 42, 0.12);
+    --accent-red: #be123c;
+    --accent-blue: #1d4ed8;
+    --accent-dark: #0f172a;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
+    --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --radius-lg: 22px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg-accent);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.72;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 72px;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,0.24) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.24) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.35), transparent 78%);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1160px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    background: var(--surface);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.55);
+    box-shadow: var(--shadow-soft);
+    border-radius: 28px;
+    padding: 28px 30px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: end;
+  }
+
+  .hero-copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(17, 24, 39, 0.06);
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+  }
+
+  .word-title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(48px, 8vw, 84px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    color: var(--accent-dark);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+    max-width: 100%;
+  }
+
+  .word-title.is-long {
+    font-size: clamp(40px, 6.2vw, 68px);
+    line-height: 0.98;
+  }
+
+  .word-title.is-very-long {
+    font-size: clamp(28px, 4.6vw, 46px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-subtitle {
+    margin-top: 14px;
+    max-width: 680px;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #4b5563;
+  }
+
+  .phonetic-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    min-width: 0;
+    max-width: 320px;
+  }
+
+  .phonetic-label {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 700;
+  }
+
+  .phonetic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 999px;
+    background: #111827;
+    color: #f9fafb;
+    font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+    font-size: 15px;
+    line-height: 1.45;
+    box-shadow: 0 8px 20px rgba(17, 24, 39, 0.18);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: center;
+    max-width: min(100%, 320px);
+  }
+
+  .phonetic.is-long {
+    font-size: 13px;
+    padding: 10px 14px;
+    max-width: 260px;
+  }
+
+  .phonetic.is-very-long {
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 10px 12px;
+    border-radius: 22px;
+    max-width: 220px;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px 24px 26px;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(29, 78, 216, 0.15);
+  }
+
+  .card-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .card-label::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-blue));
+    flex: none;
+  }
+
+  .definition-text {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.92;
+    color: var(--text-main);
+  }
+
+  .definition-text p:first-child,
+  .etymology-content p:first-child {
+    margin-top: 0;
+  }
+
+  .definition-text p:last-child,
+  .etymology-content p:last-child,
+  .nuance-list:last-child {
+    margin-bottom: 0;
+  }
+
+  .definition-text b,
+  .etymology-content b,
+  .nuance-item b {
+    color: var(--accent-dark);
+  }
+
+  .highlight-red {
+    color: var(--accent-red);
+    font-weight: 700;
+  }
+
+  .highlight-blue {
+    color: var(--accent-blue);
+    font-weight: 700;
+  }
+
+  .etymology-content {
+    color: var(--text-soft);
+    font-size: 16px;
+    line-height: 1.82;
+  }
+
+  .etymology-content ul,
+  .nuance-list {
+    margin: 14px 0 0;
+    padding-left: 20px;
+  }
+
+  .etymology-content li,
+  .nuance-item {
+    margin-bottom: 10px;
+  }
+
+  .quote-box {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(190, 24, 93, 0.12);
+    background: linear-gradient(180deg, rgba(190, 24, 93, 0.04), rgba(29, 78, 216, 0.03));
+    color: var(--text-soft);
+    font-style: italic;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 320px;
+    padding: 18px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, #fbfdff 0%, #f8fafc 100%);
+    border: 1px dashed rgba(17, 24, 39, 0.12);
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .topology-card {
+    padding: 24px 24px 26px;
+  }
+
+  .topology-card .mermaid {
+    min-height: 400px;
+    padding: 18px 12px;
+  }
+
+  .topology-card.density-dense .mermaid {
+    min-height: 460px;
+    padding: 16px 10px;
+  }
+
+  .topology-card.density-ultra .mermaid {
+    min-height: 540px;
+    padding: 14px 8px;
+  }
+
+  .mermaid svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+  }
+
+  .mermaid .node rect,
+  .mermaid .node polygon,
+  .mermaid .node path,
+  .mermaid .node circle {
+    stroke-width: 0 !important;
+    fill: transparent !important;
+  }
+
+  .mermaid .label,
+  .mermaid .nodeLabel {
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .mermaid foreignObject {
+    overflow: visible;
+  }
+
+  .mermaid foreignObject div {
+    width: 196px;
+    min-width: 196px;
+    max-width: 196px;
+    min-height: 58px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1.6px solid #cbd5e1;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    font-weight: 600;
+    color: #111827;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    box-sizing: border-box;
+  }
+
+  .topology-card.density-dense .mermaid .label,
+  .topology-card.density-dense .mermaid .nodeLabel {
+    font-size: 15px !important;
+  }
+
+  .topology-card.density-dense .mermaid foreignObject div {
+    width: 182px;
+    min-width: 182px;
+    max-width: 182px;
+    min-height: 56px;
+    padding: 9px 12px;
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+  }
+
+  .topology-card.density-ultra .mermaid .label,
+  .topology-card.density-ultra .mermaid .nodeLabel {
+    font-size: 14px !important;
+  }
+
+  .topology-card.density-ultra .mermaid foreignObject div {
+    width: 168px;
+    min-width: 168px;
+    max-width: 168px;
+    min-height: 52px;
+    padding: 8px 10px;
+    font-size: 14px !important;
+    line-height: 1.26 !important;
+  }
+
+  .mermaid .edgeLabel {
+    font-size: 15px !important;
+  }
+
+  .mermaid g.node.empty-node,
+  .mermaid g.edgeLabel.empty-node,
+  .mermaid g.label.empty-node,
+  .mermaid .edgeLabel:empty {
+    display: none !important;
+  }
+
+  .epiphany-box {
+    position: relative;
+    overflow: hidden;
+    padding: 34px 28px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #111827 0%, #0f172a 60%, #111827 100%);
+    color: #f9fafb;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.24);
+    text-align: center;
+  }
+
+  .epiphany-box::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-blue));
+  }
+
+  .epiphany-box::after {
+    content: "";
+    position: absolute;
+    inset: auto -80px -80px auto;
+    width: 220px;
+    height: 220px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 68%);
+  }
+
+  .epiphany-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+    font-weight: 700;
+  }
+
+  .epiphany-text {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-serif);
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.68;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    body {
+      padding: 24px 14px 48px;
+    }
+
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 22px 20px;
+      gap: 16px;
+    }
+
+    .phonetic-panel {
+      align-items: flex-start;
+      max-width: 100%;
+    }
+
+    .bento-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      gap: 20px;
+    }
+
+    .card {
+      padding: 20px;
+      border-radius: 18px;
+    }
+
+    .definition-text {
+      font-size: 17px;
+    }
+
+    .etymology-content {
+      font-size: 14px;
+    }
+
+    .word-title,
+    .word-title.is-long,
+    .word-title.is-very-long {
+      max-width: 100%;
+    }
+
+    .phonetic,
+    .phonetic.is-long,
+    .phonetic.is-very-long {
+      max-width: 100%;
+    }
+
+    .epiphany-box {
+      padding: 28px 18px;
+      border-radius: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Word Mastery Card</span>
+      <h1 class="word-title">{{WORD}}</h1>
+      <div class="hero-subtitle">从词源、语义、语感到结构拓扑，把一个单词拆到足够清楚，也足够好看。</div>
+    </div>
+    <div class="phonetic-panel">
+      <span class="phonetic-label">Phonetic</span>
+      <span class="phonetic">/{{PHONETIC}}/</span>
+    </div>
+  </section>
+
+  <main class="bento-grid">
+    <div class="column">
+      <section class="card">
+        <div class="card-label">Core Meaning · 核心语义</div>
+        <div class="definition-text">
+          {{DEFINITION_DEEP}}
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-label">Nuance & Context · 语感与语境</div>
+        <div class="etymology-content">
+          {{NUANCE_TEXT}}
+          <div class="quote-box">"{{EXAMPLE_SENTENCE}}"</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="column">
+      <section class="card">
+        <div class="card-label">Etymology · 词源</div>
+        <div class="etymology-content">
+          {{ETYMOLOGY}}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <section class="card topology-card">
+    <div class="card-label">Semantic Topology · 语义拓扑</div>
+    <div class="mermaid">
+{{MERMAID_CODE}}
+    </div>
+  </section>
+
+  <section class="epiphany-box">
+    <span class="epiphany-label">Epiphany · 一语道破</span>
+    <div class="epiphany-text">"{{EPIPHANY}}"</div>
+  </section>
+</div>
+
+<script>
+  const stripHtml = (text) => text.replace(/<[^>]*>/g, '');
+
+  const splitLabelIntoTokens = (label) => {
+    const normalized = label
+      .replace(/<br\s*\/?>/gi, ' ')
+      .replace(/([/+=|,:;()（）\-—，、：；])/g, ' $1 ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!normalized) return [];
+
+    if (normalized.includes(' ')) {
+      return normalized.split(' ').filter(Boolean);
+    }
+
+    return normalized.match(/.{1,6}/g) || [normalized];
+  };
+
+  const classifyTopologyDensity = (source) => {
+    const nodes = [...source.matchAll(/([A-Za-z0-9_]+)\[([\s\S]*?)\]/g)];
+    const nodeCount = nodes.length;
+    const edgeCount = (source.match(/-->/g) || []).length;
+    const avgLabelLength = nodeCount
+      ? nodes.reduce((sum, [, , label]) => sum + stripHtml(label).replace(/\s+/g, '').length, 0) / nodeCount
+      : 0;
+    const complexityScore = nodeCount * 1.25 + edgeCount * 0.75 + avgLabelLength / 5;
+
+    if (complexityScore >= 18 || nodeCount >= 8 || avgLabelLength >= 18) return 'ultra';
+    if (complexityScore >= 12 || nodeCount >= 6 || avgLabelLength >= 13) return 'dense';
+    return 'standard';
+  };
+
+  const smartBreakLabel = (label, density = 'standard') => {
+    if (/<br\s*\/?>/i.test(label)) return label;
+
+    const plain = stripHtml(label).replace(/\s+/g, ' ').trim();
+    if (!plain) return label;
+
+    const hasCjk = /[\u3400-\u9fff]/u.test(plain);
+    const maxLineChars = hasCjk
+      ? density === 'ultra' ? 8 : density === 'dense' ? 9 : 10
+      : density === 'ultra' ? 14 : density === 'dense' ? 16 : 18;
+    if (plain.length <= maxLineChars + 2) return label;
+
+    const tokens = splitLabelIntoTokens(label);
+    if (!tokens.length) return label;
+
+    const lines = [];
+    let current = '';
+
+    const pushCurrent = () => {
+      if (current.trim()) lines.push(current.trim());
+      current = '';
+    };
+
+    for (const token of tokens) {
+      const candidate = current ? `${current} ${token}` : token;
+      const candidateLength = stripHtml(candidate).replace(/\s+/g, '').length;
+
+      if (current && candidateLength > maxLineChars) {
+        pushCurrent();
+        current = token;
+      } else {
+        current = candidate;
+      }
+    }
+    pushCurrent();
+
+    if (lines.length <= 1) {
+      return label;
+    }
+
+    return lines.join('<br/>');
+  };
+
+  const autoWrapMermaidFlowchart = (source, density) =>
+    source.replace(/([A-Za-z0-9_]+)\[([\s\S]*?)\]/g, (_, nodeId, label) => {
+      const wrapped = smartBreakLabel(label.trim(), density);
+      return `${nodeId}[${wrapped}]`;
+    });
+
+  document.querySelectorAll('.mermaid').forEach((block) => {
+    const normalized = block.textContent
+      .split('\n')
+      .map((line) => line.trimEnd())
+      .filter((line) => line.trim().length > 0)
+      .join('\n')
+      .trim();
+    const topologyCard = block.closest('.topology-card');
+    const density = classifyTopologyDensity(normalized);
+    if (topologyCard) {
+      topologyCard.classList.add(`density-${density}`);
+      topologyCard.dataset.density = density;
+    }
+    block.textContent = autoWrapMermaidFlowchart(normalized, density);
+  });
+
+  const titleEl = document.querySelector('.word-title');
+  if (titleEl) {
+    const titleLength = titleEl.textContent.replace(/\s+/g, '').length;
+    if (titleLength >= 22) {
+      titleEl.classList.add('is-very-long');
+    } else if (titleLength >= 14) {
+      titleEl.classList.add('is-long');
+    }
+  }
+
+  const phoneticEl = document.querySelector('.phonetic');
+  if (phoneticEl) {
+    const phoneticLength = phoneticEl.textContent.replace(/\s+/g, '').length;
+    if (phoneticLength >= 30) {
+      phoneticEl.classList.add('is-very-long');
+    } else if (phoneticLength >= 22) {
+      phoneticEl.classList.add('is-long');
+    }
+  }
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#ffffff',
+      primaryTextColor: '#111827',
+      primaryBorderColor: '#cbd5e1',
+      lineColor: '#475569',
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
+      fontSize: '18px',
+      mainBkg: '#ffffff',
+      clusterBkg: '#f8fafc',
+      clusterBorder: '#cbd5e1',
+      edgeLabelBackground: '#ffffff',
+      nodeBorder: '#94a3b8'
+    },
+    flowchart: {
+      curve: 'basis',
+      htmlLabels: true,
+      useMaxWidth: false,
+      nodeSpacing: 40,
+      rankSpacing: 46,
+      padding: 10
+    }
+  });
+
+  window.addEventListener('load', () => {
+    const cleanupMermaid = () => {
+      document.querySelectorAll('.mermaid svg g.node, .mermaid svg g.edgeLabel, .mermaid svg g.label').forEach((node) => {
+        const text = (node.textContent || '').replace(/\s+/g, '').trim();
+        if (!text) {
+          node.classList.add('empty-node');
+          node.remove();
+        }
+      });
+    };
+    setTimeout(cleanupMermaid, 350);
+  });
+</script>
+</body>
+</html>
