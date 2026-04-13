@@ -1,5 +1,5 @@
 ---
-name: ljg-explain-words
+name: lzc-explain-words
 description: A deep-dive word mastery tool. It deconstructs one or more English words into etymology, core semantics, nuance spectrum, and visual topology, then generates museum-quality HTML cards.
 ---
 
@@ -7,12 +7,12 @@ description: A deep-dive word mastery tool. It deconstructs one or more English 
 
 <example>
 User: Deeply explain the word "Serendipity".
-Assistant: [Calls ljg-explain-words with "Serendipity"]
+Assistant: [Calls lzc-explain-words with "Serendipity"]
 </example>
 
 <example>
-User: 用 ljg-explain-words 解释 excerpt、serendipity、lucid
-Assistant: [Calls ljg-explain-words with the three words, generates three cards in input order]
+User: 用 lzc-explain-words 解释 excerpt、serendipity、lucid
+Assistant: [Calls lzc-explain-words with the three words, generates three cards in input order]
 </example>
 
 ## Instructions

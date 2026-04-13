@@ -1,4 +1,4 @@
-# ljg-explain-words
+# lzc-explain-words
 
 A Codex skill for deep English word mastery. It generates museum-quality HTML word cards that explain one or more English words through:
 
