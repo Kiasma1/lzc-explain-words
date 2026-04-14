@@ -75,6 +75,7 @@ Assistant: [Calls lzc-explain-words with the three words, generates three cards 
    * `{{EXAMPLE_SENTENCE}}`: 一个极具文学性或场景感的英文原句。
    * `{{EPIPHANY}}`: 金句内容。
    * `{{MERMAID_CODE}}`: 生成的 Mermaid 代码。
+   * 模版中的 Mermaid 运行时由仓库内置资源提供；渲染脚本会自动把 `assets/vendor/mermaid.min.js` 复制到输出目录，避免 CDN 依赖。
 
 5. **写入与交付**
    1. 将单个词或多个词的结构化数据写入一个 JSON 文件，再调用：
@@ -82,6 +83,8 @@ Assistant: [Calls lzc-explain-words with the three words, generates three cards 
    2. 对每个词生成：`word_card_{slug}.html`
    3. 如果是多个词，额外生成一个索引页：`word_cards_index.html`
    4. 如任务需要视觉交付，再继续为每个 HTML 生成整页截图。
+   5. 如果需要做极限验证，可直接运行：
+      - `python3 scripts/run_extreme_stress_test.py`
 
 最后：
 - 单词模式：输出该词的 Epiphany，并提示查看对应 HTML。

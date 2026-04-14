@@ -6,6 +6,7 @@ import argparse
 import html
 import json
 import re
+import shutil
 import unicodedata
 from pathlib import Path
 
@@ -20,6 +21,9 @@ REQUIRED_FIELDS = {
     "epiphany": "{{EPIPHANY}}",
     "mermaid_code": "{{MERMAID_CODE}}",
 }
+
+MERMAID_SCRIPT_PLACEHOLDER = "{{MERMAID_SCRIPT_TAG}}"
+LOCAL_MERMAID_FILENAME = "mermaid.min.js"
 
 
 def parse_args() -> argparse.Namespace:
@@ -75,17 +79,42 @@ def inject_ready_script(document: str) -> str:
         requestAnimationFrame(ready);
       }
     };
-    window.addEventListener('load', () => setTimeout(ready, 250));
+    const fallback = () => document.body.setAttribute('data-card-ready', '1');
+    window.addEventListener('load', () => {
+      setTimeout(ready, 250);
+      setTimeout(fallback, 4000);
+    });
   })();
 </script>
 </body>"""
     return document.replace("</body>", snippet)
 
 
+def mermaid_asset_path() -> Path:
+    path = Path(__file__).resolve().parent.parent / "assets" / "vendor" / LOCAL_MERMAID_FILENAME
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Missing Mermaid runtime asset: {path}. "
+            "Restore assets/vendor/mermaid.min.js before rendering."
+        )
+    return path
+
+
+def inject_runtime_assets(document: str) -> str:
+    script_tag = f'<script src="./{LOCAL_MERMAID_FILENAME}"></script>'
+    if MERMAID_SCRIPT_PLACEHOLDER in document:
+        return document.replace(MERMAID_SCRIPT_PLACEHOLDER, script_tag)
+    return document.replace(
+        '<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>',
+        script_tag,
+    )
+
+
 def render_entry(template: str, entry: dict[str, str]) -> str:
     rendered = template
     for field, placeholder in REQUIRED_FIELDS.items():
         rendered = rendered.replace(placeholder, entry[field])
+    rendered = inject_runtime_assets(rendered)
     return inject_ready_script(rendered)
 
 
@@ -160,6 +189,7 @@ def main() -> None:
     entries = normalize_entries(raw)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(mermaid_asset_path(), args.output_dir / LOCAL_MERMAID_FILENAME)
     outputs: list[Path] = []
 
     for entry in entries:

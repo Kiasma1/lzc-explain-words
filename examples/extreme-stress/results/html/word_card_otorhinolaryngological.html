@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word Mastery: {{WORD}}</title>
-{{MERMAID_SCRIPT_TAG}}
+<title>Word Mastery: otorhinolaryngological</title>
+<script src="./mermaid.min.js"></script>
 <style>
   :root {
     --bg-color: #f5f7fb;
@@ -548,12 +548,12 @@
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow">Word Mastery Card</span>
-      <h1 class="word-title">{{WORD}}</h1>
+      <h1 class="word-title">otorhinolaryngological</h1>
       <div class="hero-subtitle">从词源、语义、语感到结构拓扑，把一个单词拆到足够清楚，也足够好看。</div>
     </div>
     <div class="phonetic-panel">
       <span class="phonetic-label">Phonetic</span>
-      <span class="phonetic">/{{PHONETIC}}/</span>
+      <span class="phonetic">/ˌoʊ.toʊˌraɪ.noʊˌlær.ɪn.ɡəˈlɒdʒ.ɪ.kəl/</span>
     </div>
   </section>
 
@@ -562,15 +562,15 @@
       <section class="card">
         <div class="card-label">Core Meaning · 核心语义</div>
         <div class="definition-text">
-          {{DEFINITION_DEEP}}
+          <p><b>otorhinolaryngological</b> 最值得先抓的，不是逐字拆解，而是它把什么结构一次性压进了词面。这里的核心动作可以先收成一句：<b>describe the integrated ear-nose-throat field</b>。一旦抓住这个骨架，再去看前缀、后缀、语体和使用场景，长词就不再只是长度，而会重新变回一个可被追踪的系统。</p>
         </div>
       </section>
 
       <section class="card">
         <div class="card-label">Nuance & Context · 语感与语境</div>
         <div class="etymology-content">
-          {{NUANCE_TEXT}}
-          <div class="quote-box">"{{EXAMPLE_SENTENCE}}"</div>
+          <article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">otorhinolaryngological vs auditory</h3><p>auditory 只偏听觉；这个词覆盖耳鼻喉联动系统。</p><div class="tag-row"><span class="tag">single channel</span><span class="tag">specialty system</span></div></article><article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">otorhinolaryngological vs nasal</h3><p>nasal 只锁定鼻部；这里强调的是专科整合。</p><div class="tag-row"><span class="tag">single organ</span><span class="tag">combined domain</span></div></article><article class="contrast-item"><span class="compare-label">Usage · 用法</span><h3 class="contrast-title">used in specialist summaries</h3><p>往往用于门诊记录、手术说明或专科研究摘要。</p><div class="tag-row"><span class="tag">specialist note</span><span class="tag">stacked anatomy</span></div></article>
+          <div class="quote-box">"Think of otorhinolaryngological as 'describe the integrated ear-nose-throat field' unfolding into two pressure-tested semantic branches."</div>
         </div>
       </section>
     </div>
@@ -579,7 +579,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          {{ETYMOLOGY}}
+          <p><b>Origin:</b> oto + rhino + laryngo + logical</p><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 1 · 听觉区域</span><h3>oto</h3><p>耳部进入专科视野。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 2 · 鼻部区域</span><h3>rhino</h3><p>再把鼻腔系统并进来。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 3 · 喉部区域</span><h3>laryngo</h3><p>最后把发声与气道区域连上。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 4 · 学科形容词</span><h3>specialty adjective</h3><p>形成一个联合专科的描述词。</p></div></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>oto-</h3><p>耳。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>rhino-</h3><p>鼻。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>laryngo-</h3><p>喉。</p></article>
         </div>
       </section>
     </div>
@@ -588,13 +588,18 @@
   <section class="card topology-card">
     <div class="card-label">Semantic Topology · 语义拓扑</div>
     <div class="mermaid">
-{{MERMAID_CODE}}
+graph TD
+    A[oto + rhino + laryngo + logical] --> B[describe the integrated ear-nose-throat field]
+    B --> C[multi-organ specialty viewed as one practice]
+    B --> D[technical specialist adjective with stacked anatomy]
+    C --> E[它提醒读者别把器官孤立切开看，因为这个领域的诊断与手术路径本来就是相互牵动的。]
+    D --> F[词形像把三块解剖学地图卷在一起，天然要求更稳的断行与更宽容的节点布局。]
     </div>
   </section>
 
   <section class="epiphany-box">
     <span class="epiphany-label">Epiphany · 一语道破</span>
-    <div class="epiphany-text">"{{EPIPHANY}}"</div>
+    <div class="epiphany-text">"A specialty word can feel long because the body regions were never meant to stay separate here. 专科词之所以显得长，常常是因为这些身体区域在这里本来就不该被拆开。"</div>
   </section>
 </div>
 
@@ -755,6 +760,22 @@
     };
     setTimeout(cleanupMermaid, 350);
   });
+</script>
+<script>
+  (function waitForCardReady() {
+    const ready = () => {
+      if (document.querySelector('.mermaid svg')) {
+        document.body.setAttribute('data-card-ready', '1');
+      } else {
+        requestAnimationFrame(ready);
+      }
+    };
+    const fallback = () => document.body.setAttribute('data-card-ready', '1');
+    window.addEventListener('load', () => {
+      setTimeout(ready, 250);
+      setTimeout(fallback, 4000);
+    });
+  })();
 </script>
 </body>
 </html>

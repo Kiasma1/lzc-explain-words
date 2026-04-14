@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word Mastery: {{WORD}}</title>
-{{MERMAID_SCRIPT_TAG}}
+<title>Word Mastery: honorificabilitudinitatibus</title>
+<script src="./mermaid.min.js"></script>
 <style>
   :root {
     --bg-color: #f5f7fb;
@@ -548,12 +548,12 @@
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow">Word Mastery Card</span>
-      <h1 class="word-title">{{WORD}}</h1>
+      <h1 class="word-title">honorificabilitudinitatibus</h1>
       <div class="hero-subtitle">从词源、语义、语感到结构拓扑，把一个单词拆到足够清楚，也足够好看。</div>
     </div>
     <div class="phonetic-panel">
       <span class="phonetic-label">Phonetic</span>
-      <span class="phonetic">/{{PHONETIC}}/</span>
+      <span class="phonetic">/ˌɒn.ə.rɪ.fɪ.kəˌbɪl.ɪ.tjuː.dɪ.nɪˈtæ.tɪ.bəs/</span>
     </div>
   </section>
 
@@ -562,15 +562,15 @@
       <section class="card">
         <div class="card-label">Core Meaning · 核心语义</div>
         <div class="definition-text">
-          {{DEFINITION_DEEP}}
+          <p><b>honorificabilitudinitatibus</b> 最值得先抓的，不是逐字拆解，而是它把什么结构一次性压进了词面。这里的核心动作可以先收成一句：<b>state of being able to receive honors</b>。一旦抓住这个骨架，再去看前缀、后缀、语体和使用场景，长词就不再只是长度，而会重新变回一个可被追踪的系统。</p>
         </div>
       </section>
 
       <section class="card">
         <div class="card-label">Nuance & Context · 语感与语境</div>
         <div class="etymology-content">
-          {{NUANCE_TEXT}}
-          <div class="quote-box">"{{EXAMPLE_SENTENCE}}"</div>
+          <article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">honorificabilitudinitatibus vs honorable</h3><p>honorable 只是“值得尊敬”；这个词更像把“可授荣资格”写成法令。</p><div class="tag-row"><span class="tag">simple adjective</span><span class="tag">institutionalized status</span></div></article><article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">honorificabilitudinitatibus vs honorific</h3><p>honorific 更偏“表示尊敬的”；这里强调的是主体可被授予荣誉的状态。</p><div class="tag-row"><span class="tag">mark of respect</span><span class="tag">capacity for honor</span></div></article><article class="contrast-item"><span class="compare-label">Usage · 用法</span><h3 class="contrast-title">used as a historical display word</h3><p>它常被引用时，引用者也在展示自己知道它。</p><div class="tag-row"><span class="tag">display knowledge</span><span class="tag">learned theater</span></div></article>
+          <div class="quote-box">"Think of honorificabilitudinitatibus as 'state of being able to receive honors' unfolding into two pressure-tested semantic branches."</div>
         </div>
       </section>
     </div>
@@ -579,7 +579,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          {{ETYMOLOGY}}
+          <p><b>Origin:</b> Latin scholastic abstraction chain</p><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 1 · 荣誉核心</span><h3>honor</h3><p>先有社会性承认。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 2 · 可得资格</span><h3>honorificabilis</h3><p>再长出“可被授荣”的性质。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 3 · 抽象化</span><h3>-tudo / -tas layers</h3><p>把性质进一步名词化、制度化。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 4 · 历史语感</span><h3>scholastic prestige noun</h3><p>最后形成一种带表演性的学术长词。</p></div></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>honor</h3><p>荣誉与认可的中心词。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>-fic</h3><p>使成、造成某种状态。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>dignity</h3><p>更现代、更常见的尊严框架。</p></article>
         </div>
       </section>
     </div>
@@ -588,13 +588,18 @@
   <section class="card topology-card">
     <div class="card-label">Semantic Topology · 语义拓扑</div>
     <div class="mermaid">
-{{MERMAID_CODE}}
+graph TD
+    A[Latin scholastic abstraction chain] --> B[state of being able to receive honors]
+    B --> C[ceremonial eligibility for public distinction]
+    B --> D[compressed medieval display of learned prestige]
+    C --> E[这个词让“值得被授荣”不再是单个判断，而像被包成一层正式制度语言，强调资格和可授予性。]
+    D --> F[它的长度和古典气质本身就在传递一种学术、戏剧、夸饰的身份表演感。]
     </div>
   </section>
 
   <section class="epiphany-box">
     <span class="epiphany-label">Epiphany · 一语道破</span>
-    <div class="epiphany-text">"{{EPIPHANY}}"</div>
+    <div class="epiphany-text">"Some words carry prestige not by meaning alone, but by how ceremonially they occupy space. 有些词的威严不只来自意义，也来自它们如何郑重地占据空间。"</div>
   </section>
 </div>
 
@@ -755,6 +760,22 @@
     };
     setTimeout(cleanupMermaid, 350);
   });
+</script>
+<script>
+  (function waitForCardReady() {
+    const ready = () => {
+      if (document.querySelector('.mermaid svg')) {
+        document.body.setAttribute('data-card-ready', '1');
+      } else {
+        requestAnimationFrame(ready);
+      }
+    };
+    const fallback = () => document.body.setAttribute('data-card-ready', '1');
+    window.addEventListener('load', () => {
+      setTimeout(ready, 250);
+      setTimeout(fallback, 4000);
+    });
+  })();
 </script>
 </body>
 </html>

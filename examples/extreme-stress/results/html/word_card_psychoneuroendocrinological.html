@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word Mastery: {{WORD}}</title>
-{{MERMAID_SCRIPT_TAG}}
+<title>Word Mastery: psychoneuroendocrinological</title>
+<script src="./mermaid.min.js"></script>
 <style>
   :root {
     --bg-color: #f5f7fb;
@@ -548,12 +548,12 @@
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow">Word Mastery Card</span>
-      <h1 class="word-title">{{WORD}}</h1>
+      <h1 class="word-title">psychoneuroendocrinological</h1>
       <div class="hero-subtitle">从词源、语义、语感到结构拓扑，把一个单词拆到足够清楚，也足够好看。</div>
     </div>
     <div class="phonetic-panel">
       <span class="phonetic-label">Phonetic</span>
-      <span class="phonetic">/{{PHONETIC}}/</span>
+      <span class="phonetic">/ˌsaɪ.koʊˌnjʊr.oʊˌɛn.də.krɪ.nəˈlɒdʒ.ɪ.kəl/</span>
     </div>
   </section>
 
@@ -562,15 +562,15 @@
       <section class="card">
         <div class="card-label">Core Meaning · 核心语义</div>
         <div class="definition-text">
-          {{DEFINITION_DEEP}}
+          <p><b>psychoneuroendocrinological</b> 最值得先抓的，不是逐字拆解，而是它把什么结构一次性压进了词面。这里的核心动作可以先收成一句：<b>describe a linked mind-nerve-hormone system</b>。一旦抓住这个骨架，再去看前缀、后缀、语体和使用场景，长词就不再只是长度，而会重新变回一个可被追踪的系统。</p>
         </div>
       </section>
 
       <section class="card">
         <div class="card-label">Nuance & Context · 语感与语境</div>
         <div class="etymology-content">
-          {{NUANCE_TEXT}}
-          <div class="quote-box">"{{EXAMPLE_SENTENCE}}"</div>
+          <article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">psychoneuroendocrinological vs neurological</h3><p>neurological 只看神经；这个词要求你把心理和激素系统一并打开。</p><div class="tag-row"><span class="tag">single system</span><span class="tag">triple system</span></div></article><article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">psychoneuroendocrinological vs psychosomatic</h3><p>psychosomatic 更偏身心互动；这里更像实证地追踪神经和激素网络。</p><div class="tag-row"><span class="tag">broad mind-body</span><span class="tag">tracked system linkage</span></div></article><article class="contrast-item"><span class="compare-label">Usage · 用法</span><h3 class="contrast-title">used in integrative research framing</h3><p>常见于要同时解释压力、炎症、睡眠和情绪的研究写法。</p><div class="tag-row"><span class="tag">integrative frame</span><span class="tag">stacked causality</span></div></article>
+          <div class="quote-box">"Think of psychoneuroendocrinological as 'describe a linked mind-nerve-hormone system' unfolding into two pressure-tested semantic branches."</div>
         </div>
       </section>
     </div>
@@ -579,7 +579,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          {{ETYMOLOGY}}
+          <p><b>Origin:</b> psycho + neuro + endocrine + logical</p><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 1 · 心理层</span><h3>psycho</h3><p>先把主观压力和体验纳入。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 2 · 神经层</span><h3>neuro</h3><p>再把传导与回路接上。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 3 · 激素层</span><h3>endocrino</h3><p>然后把体内化学调节并进来。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 4 · 研究语体</span><h3>integrative adjective</h3><p>最后形成高密度综合研究形容词。</p></div></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>psyche</h3><p>心智与主观体验。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>neuron</h3><p>神经传导系统。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>endocrine</h3><p>激素与内分泌调节。</p></article>
         </div>
       </section>
     </div>
@@ -588,13 +588,18 @@
   <section class="card topology-card">
     <div class="card-label">Semantic Topology · 语义拓扑</div>
     <div class="mermaid">
-{{MERMAID_CODE}}
+graph TD
+    A[psycho + neuro + endocrine + logical] --> B[describe a linked mind-nerve-hormone system]
+    B --> C[cross-system scientific integration under one lens]
+    B --> D[high-density research register with stacked domains]
+    C --> E[它提示读者别把情绪、神经活动和激素变化拆开看，而要用一张联动图去理解症状、压力与调节。]
+    D --> F[阅读时的压迫感来自学科堆叠：每多一层前缀，句子都更像论文摘要而不是一般说明。]
     </div>
   </section>
 
   <section class="epiphany-box">
     <span class="epiphany-label">Epiphany · 一语道破</span>
-    <div class="epiphany-text">"{{EPIPHANY}}"</div>
+    <div class="epiphany-text">"Sometimes a long word is a demand: stop isolating systems that keep acting together. 有时长词本身就是一道命令：别再把总在一起起作用的系统拆开看。"</div>
   </section>
 </div>
 
@@ -755,6 +760,22 @@
     };
     setTimeout(cleanupMermaid, 350);
   });
+</script>
+<script>
+  (function waitForCardReady() {
+    const ready = () => {
+      if (document.querySelector('.mermaid svg')) {
+        document.body.setAttribute('data-card-ready', '1');
+      } else {
+        requestAnimationFrame(ready);
+      }
+    };
+    const fallback = () => document.body.setAttribute('data-card-ready', '1');
+    window.addEventListener('load', () => {
+      setTimeout(ready, 250);
+      setTimeout(fallback, 4000);
+    });
+  })();
 </script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word Mastery: {{WORD}}</title>
-{{MERMAID_SCRIPT_TAG}}
+<title>Word Mastery: deinstitutionalization</title>
+<script src="./mermaid.min.js"></script>
 <style>
   :root {
     --bg-color: #f5f7fb;
@@ -548,12 +548,12 @@
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow">Word Mastery Card</span>
-      <h1 class="word-title">{{WORD}}</h1>
+      <h1 class="word-title">deinstitutionalization</h1>
       <div class="hero-subtitle">从词源、语义、语感到结构拓扑，把一个单词拆到足够清楚，也足够好看。</div>
     </div>
     <div class="phonetic-panel">
       <span class="phonetic-label">Phonetic</span>
-      <span class="phonetic">/{{PHONETIC}}/</span>
+      <span class="phonetic">/ˌdiːˌɪn.stɪˌtjuː.ʃə.nə.laɪˈzeɪ.ʃən/</span>
     </div>
   </section>
 
@@ -562,15 +562,15 @@
       <section class="card">
         <div class="card-label">Core Meaning · 核心语义</div>
         <div class="definition-text">
-          {{DEFINITION_DEEP}}
+          <p><b>deinstitutionalization</b> 最值得先抓的，不是逐字拆解，而是它把什么结构一次性压进了词面。这里的核心动作可以先收成一句：<b>shift people out of institutional containment</b>。一旦抓住这个骨架，再去看前缀、后缀、语体和使用场景，长词就不再只是长度，而会重新变回一个可被追踪的系统。</p>
         </div>
       </section>
 
       <section class="card">
         <div class="card-label">Nuance & Context · 语感与语境</div>
         <div class="etymology-content">
-          {{NUANCE_TEXT}}
-          <div class="quote-box">"{{EXAMPLE_SENTENCE}}"</div>
+          <article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">deinstitutionalization vs discharge</h3><p>discharge 只是出院；这个词说的是长期制度安排被拆解。</p><div class="tag-row"><span class="tag">single release</span><span class="tag">system reform</span></div></article><article class="contrast-item"><span class="compare-label">Compare · 对比</span><h3 class="contrast-title">deinstitutionalization vs community care</h3><p>后者是替代方向；前者强调从机构框架里退出本身。</p><div class="tag-row"><span class="tag">replacement model</span><span class="tag">withdrawal process</span></div></article><article class="contrast-item"><span class="compare-label">Usage · 用法</span><h3 class="contrast-title">used in policy and mental-health history</h3><p>常出现在公共政策、精神卫生史和社会服务评估里。</p><div class="tag-row"><span class="tag">policy history</span><span class="tag">implementation gap</span></div></article>
+          <div class="quote-box">"Think of deinstitutionalization as 'shift people out of institutional containment' unfolding into two pressure-tested semantic branches."</div>
         </div>
       </section>
     </div>
@@ -579,7 +579,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          {{ETYMOLOGY}}
+          <p><b>Origin:</b> de + institutional + -ization</p><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 1 · 制度容器</span><h3>institution</h3><p>先有一个集中收纳与管理的机构框架。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 2 · 反向动作</span><h3>de-</h3><p>然后开始拆离、退出、转移。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 3 · 政策过程</span><h3>-ization</h3><p>结果不是一次动作，而是一整套政策过程。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 4 · 现代语感</span><h3>reform noun under dispute</h3><p>它天然带着改革承诺与执行风险。</p></div></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>institution</h3><p>制度化容器。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>custodial care</h3><p>机构性照护与控制。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>community care</h3><p>去机构化后的替代方向。</p></article>
         </div>
       </section>
     </div>
@@ -588,13 +588,18 @@
   <section class="card topology-card">
     <div class="card-label">Semantic Topology · 语义拓扑</div>
     <div class="mermaid">
-{{MERMAID_CODE}}
+graph TD
+    A[de + institutional + -ization] --> B[shift people out of institutional containment]
+    B --> C[policy move away from custodial institutional housing]
+    B --> D[contested reform narrative with social tradeoffs]
+    C --> E[左边不是单纯搬地方，而是从“大机构集中安置”转向社区支持、门诊服务与更分散的生活安排。]
+    D --> F[右边则提醒你：它常伴随争议，因为机构退出不一定自动等于支持到位，政策语言和现实结果可能分叉。]
     </div>
   </section>
 
   <section class="epiphany-box">
     <span class="epiphany-label">Epiphany · 一语道破</span>
-    <div class="epiphany-text">"{{EPIPHANY}}"</div>
+    <div class="epiphany-text">"Policy words become long when they carry both structural hope and structural risk at once. 政策词会变长，往往是因为它同时背着结构性的希望和结构性的风险。"</div>
   </section>
 </div>
 
@@ -755,6 +760,22 @@
     };
     setTimeout(cleanupMermaid, 350);
   });
+</script>
+<script>
+  (function waitForCardReady() {
+    const ready = () => {
+      if (document.querySelector('.mermaid svg')) {
+        document.body.setAttribute('data-card-ready', '1');
+      } else {
+        requestAnimationFrame(ready);
+      }
+    };
+    const fallback = () => document.body.setAttribute('data-card-ready', '1');
+    window.addEventListener('load', () => {
+      setTimeout(ready, 250);
+      setTimeout(fallback, 4000);
+    });
+  })();
 </script>
 </body>
 </html>
