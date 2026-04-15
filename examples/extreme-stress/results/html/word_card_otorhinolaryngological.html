@@ -418,6 +418,40 @@
     line-height: 1.78;
   }
 
+  .etymology-cognate-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .etymology-cognate-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+  }
+
+  .cognate-relation {
+    margin: 8px 0 0;
+    color: #0f766e;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .etymology-supplement-group {
+    margin-top: 18px;
+  }
+
+  .etymology-supplement {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px dashed rgba(148, 163, 184, 0.38);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98));
+  }
+
   .etymology-content ul,
   .nuance-list {
     margin: 14px 0 0;
@@ -771,7 +805,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">oto + rhino + laryngo + logical</div><p class="etymology-origin-note">这个词本质上是把耳、鼻、喉三块解剖区域直接并列，再压成一个专科形容词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>oto</h3><p class="etymology-chunk-gloss">ear</p><p class="etymology-chunk-note">先把耳部系统放进专科视野。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>rhino</h3><p class="etymology-chunk-gloss">nose</p><p class="etymology-chunk-note">再把鼻部系统并进来。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>laryngo</h3><p class="etymology-chunk-gloss">larynx / throat</p><p class="etymology-chunk-note">最后把喉与发声/气道区域接上。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">suffix</span><h3>logical</h3><p class="etymology-chunk-gloss">relating to a field of study</p><p class="etymology-chunk-note">把前面的解剖并列收成一个学科性形容词。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>anatomical stacking</h3><p>词块不是递进抽象，而是先把三个身体区域直接摞在一起。</p></article><article class="etymology-development-card"><span class="etymology-chip">field formation</span><span class="stage-label">Step 2</span><h3>specialty formation</h3><p>再由形容词结尾把它们收束成一个联合专科。</p></article><article class="etymology-development-card"><span class="etymology-chip">reading cue</span><span class="stage-label">Step 3</span><h3>reader effect</h3><p>所以它的长度感来自“解剖区域堆叠”，而不是复杂哲学抽象。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>otology</h3><p class="etymology-chunk-gloss">ear-specific branch</p><p>只看耳部。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>rhinology</h3><p class="etymology-chunk-gloss">nose-specific branch</p><p>只看鼻部。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>laryngology</h3><p class="etymology-chunk-gloss">throat-specific branch</p><p>只看喉部。</p></article></div></section>
+          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">oto + rhino + laryngo + logical</div><p class="etymology-origin-note">这个词本质上是把耳、鼻、喉三块解剖区域直接并列，再压成一个专科形容词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>oto</h3><p class="etymology-chunk-gloss">ear</p><p class="etymology-chunk-note">先把耳部系统放进专科视野。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>rhino</h3><p class="etymology-chunk-gloss">nose</p><p class="etymology-chunk-note">再把鼻部系统并进来。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>laryngo</h3><p class="etymology-chunk-gloss">larynx / throat</p><p class="etymology-chunk-note">最后把喉与发声/气道区域接上。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">suffix</span><h3>logical</h3><p class="etymology-chunk-gloss">relating to a field of study</p><p class="etymology-chunk-note">把前面的解剖并列收成一个学科性形容词。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>anatomical stacking</h3><p>词块不是递进抽象，而是先把三个身体区域直接摞在一起。</p></article><article class="etymology-development-card"><span class="etymology-chip">field formation</span><span class="stage-label">Step 2</span><h3>specialty formation</h3><p>再由形容词结尾把它们收束成一个联合专科。</p></article><article class="etymology-development-card"><span class="etymology-chip">reading cue</span><span class="stage-label">Step 3</span><h3>reader effect</h3><p>所以它的长度感来自“解剖区域堆叠”，而不是复杂哲学抽象。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>otology</h3><p class="cognate-relation">ear-specific branch</p><p>只看耳部。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>rhinology</h3><p class="cognate-relation">nose-specific branch</p><p>只看鼻部。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>laryngology</h3><p class="cognate-relation">throat-specific branch</p><p>只看喉部。</p></article></div></section>
         </div>
       </section>
     </div>

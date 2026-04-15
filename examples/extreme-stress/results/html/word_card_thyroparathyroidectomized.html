@@ -418,6 +418,40 @@
     line-height: 1.78;
   }
 
+  .etymology-cognate-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .etymology-cognate-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+  }
+
+  .cognate-relation {
+    margin: 8px 0 0;
+    color: #0f766e;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .etymology-supplement-group {
+    margin-top: 18px;
+  }
+
+  .etymology-supplement {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px dashed rgba(148, 163, 184, 0.38);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98));
+  }
+
   .etymology-content ul,
   .nuance-list {
     margin: 14px 0 0;
@@ -771,7 +805,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">thyro + para-thyroid + ectomy + -ized</div><p class="etymology-origin-note">这个词的重点不是抽象义，而是把“涉及哪些腺体 + 做了什么手术 + 术后留下什么状态”压成一个标签。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>thyro</h3><p class="etymology-chunk-gloss">thyroid</p><p class="etymology-chunk-note">先点出甲状腺。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>para-thyroid</h3><p class="etymology-chunk-gloss">parathyroid</p><p class="etymology-chunk-note">再把甲旁腺并进来，说明不是单一腺体问题。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">procedure</span><h3>ectomy</h3><p class="etymology-chunk-gloss">surgical removal</p><p class="etymology-chunk-note">明确这里发生的是切除，而不是一般观察。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">result state</span><h3>-ized</h3><p class="etymology-chunk-gloss">left in a resulting state</p><p class="etymology-chunk-note">把整个词落成“术后已经被改写的状态”。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>organs identified</h3><p>先明确牵涉的是哪两类腺体。</p></article><article class="etymology-development-card"><span class="etymology-chip">clinical compression</span><span class="stage-label">Step 2</span><h3>procedure compressed</h3><p>再把切除动作塞进词中，让词面自带病历压缩感。</p></article><article class="etymology-development-card"><span class="etymology-chip">final sense</span><span class="stage-label">Step 3</span><h3>state after intervention</h3><p>最后重点落在“主体现在处于怎样的术后状态”。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>thyroidectomy</h3><p class="etymology-chunk-gloss">related procedure term</p><p>只涉及甲状腺切除。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>parathyroid</h3><p class="etymology-chunk-gloss">shared organ term</p><p>甲旁腺相关。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>ectomy</h3><p class="etymology-chunk-gloss">shared procedure marker</p><p>切除类医学词共同后缀。</p></article></div></section>
+          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">thyro + para-thyroid + ectomy + -ized</div><p class="etymology-origin-note">这个词的重点不是抽象义，而是把“涉及哪些腺体 + 做了什么手术 + 术后留下什么状态”压成一个标签。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>thyro</h3><p class="etymology-chunk-gloss">thyroid</p><p class="etymology-chunk-note">先点出甲状腺。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>para-thyroid</h3><p class="etymology-chunk-gloss">parathyroid</p><p class="etymology-chunk-note">再把甲旁腺并进来，说明不是单一腺体问题。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">procedure</span><h3>ectomy</h3><p class="etymology-chunk-gloss">surgical removal</p><p class="etymology-chunk-note">明确这里发生的是切除，而不是一般观察。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">result state</span><h3>-ized</h3><p class="etymology-chunk-gloss">left in a resulting state</p><p class="etymology-chunk-note">把整个词落成“术后已经被改写的状态”。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>organs identified</h3><p>先明确牵涉的是哪两类腺体。</p></article><article class="etymology-development-card"><span class="etymology-chip">clinical compression</span><span class="stage-label">Step 2</span><h3>procedure compressed</h3><p>再把切除动作塞进词中，让词面自带病历压缩感。</p></article><article class="etymology-development-card"><span class="etymology-chip">final sense</span><span class="stage-label">Step 3</span><h3>state after intervention</h3><p>最后重点落在“主体现在处于怎样的术后状态”。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>thyroidectomy</h3><p class="cognate-relation">related procedure term</p><p>只涉及甲状腺切除。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>parathyroid</h3><p class="cognate-relation">shared organ term</p><p>甲旁腺相关。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>ectomy</h3><p class="cognate-relation">shared procedure marker</p><p>切除类医学词共同后缀。</p></article></div></section>
         </div>
       </section>
     </div>

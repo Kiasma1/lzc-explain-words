@@ -72,6 +72,7 @@ Assistant: [Calls lzc-explain-words with the three words, generates three cards 
    * `etymology_chunks`
    * `etymology_development`
    * `etymology_cognates`
+   * 如果只补了部分结构化字段，保留 `etymology` 里的补充 HTML 说明，渲染器会把它放到 `Additional Notes · 补充说明`
 
 4. **渲染卡片**
    使用结构化数据替换模版变量：

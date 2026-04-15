@@ -418,6 +418,40 @@
     line-height: 1.78;
   }
 
+  .etymology-cognate-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .etymology-cognate-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+  }
+
+  .cognate-relation {
+    margin: 8px 0 0;
+    color: #0f766e;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .etymology-supplement-group {
+    margin-top: 18px;
+  }
+
+  .etymology-supplement {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px dashed rgba(148, 163, 184, 0.38);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98));
+  }
+
   .etymology-content ul,
   .nuance-list {
     margin: 14px 0 0;
@@ -771,7 +805,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">de + institution + -al + -ization</div><p class="etymology-origin-note">这个词最重要的不是单个小词块，而是“从机构框架里退出”被做成了一个政策过程名词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">prefix</span><h3>de-</h3><p class="etymology-chunk-gloss">out of / away from</p><p class="etymology-chunk-note">给整个词加上“退出、拆离”的方向。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>institution</h3><p class="etymology-chunk-gloss">institution / organized system</p><p class="etymology-chunk-note">核心容器是一个制度化、集中化的机构框架。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">linking suffix</span><h3>-al</h3><p class="etymology-chunk-gloss">relating to</p><p class="etymology-chunk-note">把机构先转成形容性质。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">process suffix</span><h3>-ization</h3><p class="etymology-chunk-gloss">process / policy movement</p><p class="etymology-chunk-note">最后把整个方向收成一个长期过程，而不是一次动作。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>from institution to institutional</h3><p>先把“机构”变成一种制度化安排。</p></article><article class="etymology-development-card"><span class="etymology-chip">direction shift</span><span class="stage-label">Step 2</span><h3>from institutional to de-institutional</h3><p>再通过 de- 明确方向：从这种安排里退出。</p></article><article class="etymology-development-card"><span class="etymology-chip">final sense</span><span class="stage-label">Step 3</span><h3>from direction to policy process</h3><p>最后通过 -ization 把退出动作扩展成一整套政策与历史过程。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>institution</h3><p class="etymology-chunk-gloss">shared root</p><p>制度化容器。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>institutional</h3><p class="etymology-chunk-gloss">intermediate form</p><p>从机构到制度安排的中间层。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>community care</h3><p class="etymology-chunk-gloss">semantic neighbor</p><p>去机构化后的常见替代方向。</p></article></div></section>
+          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">de + institution + -al + -ization</div><p class="etymology-origin-note">这个词最重要的不是单个小词块，而是“从机构框架里退出”被做成了一个政策过程名词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">prefix</span><h3>de-</h3><p class="etymology-chunk-gloss">out of / away from</p><p class="etymology-chunk-note">给整个词加上“退出、拆离”的方向。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>institution</h3><p class="etymology-chunk-gloss">institution / organized system</p><p class="etymology-chunk-note">核心容器是一个制度化、集中化的机构框架。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">linking suffix</span><h3>-al</h3><p class="etymology-chunk-gloss">relating to</p><p class="etymology-chunk-note">把机构先转成形容性质。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">process suffix</span><h3>-ization</h3><p class="etymology-chunk-gloss">process / policy movement</p><p class="etymology-chunk-note">最后把整个方向收成一个长期过程，而不是一次动作。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>from institution to institutional</h3><p>先把“机构”变成一种制度化安排。</p></article><article class="etymology-development-card"><span class="etymology-chip">direction shift</span><span class="stage-label">Step 2</span><h3>from institutional to de-institutional</h3><p>再通过 de- 明确方向：从这种安排里退出。</p></article><article class="etymology-development-card"><span class="etymology-chip">final sense</span><span class="stage-label">Step 3</span><h3>from direction to policy process</h3><p>最后通过 -ization 把退出动作扩展成一整套政策与历史过程。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>institution</h3><p class="cognate-relation">shared root</p><p>制度化容器。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>institutional</h3><p class="cognate-relation">intermediate form</p><p>从机构到制度安排的中间层。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>community care</h3><p class="cognate-relation">semantic neighbor</p><p>去机构化后的常见替代方向。</p></article></div></section>
         </div>
       </section>
     </div>

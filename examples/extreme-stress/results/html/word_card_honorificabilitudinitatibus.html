@@ -418,6 +418,40 @@
     line-height: 1.78;
   }
 
+  .etymology-cognate-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .etymology-cognate-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+  }
+
+  .cognate-relation {
+    margin: 8px 0 0;
+    color: #0f766e;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .etymology-supplement-group {
+    margin-top: 18px;
+  }
+
+  .etymology-supplement {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px dashed rgba(148, 163, 184, 0.38);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98));
+  }
+
   .etymology-content ul,
   .nuance-list {
     margin: 14px 0 0;
@@ -771,7 +805,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">honor + -ific- + -abil- + -tudin- + -itatibus</div><p class="etymology-origin-note">它不是单个简单词根，而是一串把“荣誉资格”层层抽象化、名词化的拉丁化长构词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>honor</h3><p class="etymology-chunk-gloss">honor</p><p class="etymology-chunk-note">核心从“荣誉、被承认”开始。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">forming element</span><h3>-ific-</h3><p class="etymology-chunk-gloss">making / causing</p><p class="etymology-chunk-note">加入“使成某种状态”的力量。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">capacity marker</span><h3>-abil-</h3><p class="etymology-chunk-gloss">able / capable of</p><p class="etymology-chunk-note">把它推进成“有资格被授予”的意思。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">abstraction</span><h3>-tudin-</h3><p class="etymology-chunk-gloss">state / condition</p><p class="etymology-chunk-note">把这种资格再抽象成一种状态。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">ending</span><h3>-itatibus</h3><p class="etymology-chunk-gloss">formal pluralized nominal ending</p><p class="etymology-chunk-note">让整词带上中古学术拉丁式的制度化、书卷化外壳。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>from honor to honor-worthy capacity</h3><p>词义先从“荣誉”长成“可被授予荣誉的资格”。</p></article><article class="etymology-development-card"><span class="etymology-chip">abstraction</span><span class="stage-label">Step 2</span><h3>from capacity to abstract status</h3><p>后缀层层叠加，把具体资格推进成抽象、正式、制度化的状态名词。</p></article><article class="etymology-development-card"><span class="etymology-chip">rhetorical effect</span><span class="stage-label">Step 3</span><h3>rhetorical effect</h3><p>因此它读起来不像日常词，而像一个故意摆出学识重量的历史长词。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>honor</h3><p class="etymology-chunk-gloss">shared root</p><p>荣誉与认可的中心词。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>honorific</h3><p class="etymology-chunk-gloss">closer modern cousin</p><p>更常见、更短的现代相关词。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>dignity</h3><p class="etymology-chunk-gloss">semantic neighbor</p><p>更现代地表达“尊严、可受敬重”的框架。</p></article></div></section>
+          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">honor + -ific- + -abil- + -tudin- + -itatibus</div><p class="etymology-origin-note">它不是单个简单词根，而是一串把“荣誉资格”层层抽象化、名词化的拉丁化长构词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>honor</h3><p class="etymology-chunk-gloss">honor</p><p class="etymology-chunk-note">核心从“荣誉、被承认”开始。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">forming element</span><h3>-ific-</h3><p class="etymology-chunk-gloss">making / causing</p><p class="etymology-chunk-note">加入“使成某种状态”的力量。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">capacity marker</span><h3>-abil-</h3><p class="etymology-chunk-gloss">able / capable of</p><p class="etymology-chunk-note">把它推进成“有资格被授予”的意思。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">abstraction</span><h3>-tudin-</h3><p class="etymology-chunk-gloss">state / condition</p><p class="etymology-chunk-note">把这种资格再抽象成一种状态。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">ending</span><h3>-itatibus</h3><p class="etymology-chunk-gloss">formal pluralized nominal ending</p><p class="etymology-chunk-note">让整词带上中古学术拉丁式的制度化、书卷化外壳。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>from honor to honor-worthy capacity</h3><p>词义先从“荣誉”长成“可被授予荣誉的资格”。</p></article><article class="etymology-development-card"><span class="etymology-chip">abstraction</span><span class="stage-label">Step 2</span><h3>from capacity to abstract status</h3><p>后缀层层叠加，把具体资格推进成抽象、正式、制度化的状态名词。</p></article><article class="etymology-development-card"><span class="etymology-chip">rhetorical effect</span><span class="stage-label">Step 3</span><h3>rhetorical effect</h3><p>因此它读起来不像日常词，而像一个故意摆出学识重量的历史长词。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>honor</h3><p class="cognate-relation">shared root</p><p>荣誉与认可的中心词。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>honorific</h3><p class="cognate-relation">closer modern cousin</p><p>更常见、更短的现代相关词。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>dignity</h3><p class="cognate-relation">semantic neighbor</p><p>更现代地表达“尊严、可受敬重”的框架。</p></article></div></section>
         </div>
       </section>
     </div>

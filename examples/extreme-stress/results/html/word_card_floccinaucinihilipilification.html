@@ -418,6 +418,40 @@
     line-height: 1.78;
   }
 
+  .etymology-cognate-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .etymology-cognate-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+  }
+
+  .cognate-relation {
+    margin: 8px 0 0;
+    color: #0f766e;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .etymology-supplement-group {
+    margin-top: 18px;
+  }
+
+  .etymology-supplement {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px dashed rgba(148, 163, 184, 0.38);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98));
+  }
+
   .etymology-content ul,
   .nuance-list {
     margin: 14px 0 0;
@@ -771,7 +805,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">flocci + nauci + nihili + pili + -fication</div><p class="etymology-origin-note">这是一个把多个“几乎不值钱”的拉丁来源堆叠起来的炫学式长词，最后再接上名词后缀。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>flocci</h3><p class="etymology-chunk-gloss">of little value</p><p class="etymology-chunk-note">表示“像一团羊毛絮那样不值什么”，先把价值往下压。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>nauci</h3><p class="etymology-chunk-gloss">worth almost nothing</p><p class="etymology-chunk-note">继续补一层“几乎不值一顾”的感觉。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>nihili</h3><p class="etymology-chunk-gloss">of no worth</p><p class="etymology-chunk-note">把价值进一步压到接近零。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>pili</h3><p class="etymology-chunk-gloss">not worth a hair</p><p class="etymology-chunk-note">连“一根毛”都不值，完成夸张性的贬低。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">suffix</span><h3>-fication</h3><p class="etymology-chunk-gloss">the act/process of making</p><p class="etymology-chunk-note">把前面的轻视动作收束成一个名词：一种“把价值判低”的过程。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>semantic move</h3><p>前面四个词块都在重复同一件事：把对象的价值不断往下判。</p></article><article class="etymology-development-card"><span class="etymology-chip">rhetorical effect</span><span class="stage-label">Step 2</span><h3>rhetorical effect</h3><p>长而书卷气的外形让“轻视”不只是判断，还带上表演性和炫技感。</p></article><article class="etymology-development-card"><span class="etymology-chip">final sense</span><span class="stage-label">Step 3</span><h3>modern takeaway</h3><p>所以这个词真正强调的是：用一种夸张、学究式的方式把某物判成几乎不值一提。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>nil</h3><p class="etymology-chunk-gloss">shared low-value idea</p><p>现代英语里更直接的“零、无”价值感。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>-fication</h3><p class="etymology-chunk-gloss">shared nominalizer</p><p>把动作或变化收成一个过程名词。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>trivialize</h3><p class="etymology-chunk-gloss">modern semantic cousin</p><p>语义上更常见的“把某事看轻”。</p></article></div></section>
+          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">flocci + nauci + nihili + pili + -fication</div><p class="etymology-origin-note">这是一个把多个“几乎不值钱”的拉丁来源堆叠起来的炫学式长词，最后再接上名词后缀。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>flocci</h3><p class="etymology-chunk-gloss">of little value</p><p class="etymology-chunk-note">表示“像一团羊毛絮那样不值什么”，先把价值往下压。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>nauci</h3><p class="etymology-chunk-gloss">worth almost nothing</p><p class="etymology-chunk-note">继续补一层“几乎不值一顾”的感觉。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>nihili</h3><p class="etymology-chunk-gloss">of no worth</p><p class="etymology-chunk-note">把价值进一步压到接近零。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">chunk</span><h3>pili</h3><p class="etymology-chunk-gloss">not worth a hair</p><p class="etymology-chunk-note">连“一根毛”都不值，完成夸张性的贬低。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">suffix</span><h3>-fication</h3><p class="etymology-chunk-gloss">the act/process of making</p><p class="etymology-chunk-note">把前面的轻视动作收束成一个名词：一种“把价值判低”的过程。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>semantic move</h3><p>前面四个词块都在重复同一件事：把对象的价值不断往下判。</p></article><article class="etymology-development-card"><span class="etymology-chip">rhetorical effect</span><span class="stage-label">Step 2</span><h3>rhetorical effect</h3><p>长而书卷气的外形让“轻视”不只是判断，还带上表演性和炫技感。</p></article><article class="etymology-development-card"><span class="etymology-chip">final sense</span><span class="stage-label">Step 3</span><h3>modern takeaway</h3><p>所以这个词真正强调的是：用一种夸张、学究式的方式把某物判成几乎不值一提。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>nil</h3><p class="cognate-relation">shared low-value idea</p><p>现代英语里更直接的“零、无”价值感。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>-fication</h3><p class="cognate-relation">shared nominalizer</p><p>把动作或变化收成一个过程名词。</p></article><article class="etymology-cognate-card family-mini"><span class="family-label">Family · 同族词</span><h3>trivialize</h3><p class="cognate-relation">modern semantic cousin</p><p>语义上更常见的“把某事看轻”。</p></article></div></section>
         </div>
       </section>
     </div>

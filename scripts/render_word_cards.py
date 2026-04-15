@@ -124,12 +124,35 @@ def as_list_of_dicts(value: Any) -> list[dict[str, Any]]:
     return [item for item in value if isinstance(item, dict)]
 
 
+def extract_text_from_html(value: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", value)
+    text = html.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def has_meaningful_etymology_html(value: str) -> bool:
+    text = extract_text_from_html(value)
+    if not text:
+        return False
+    lowered = text.lower()
+    placeholder_texts = {
+        "...",
+        "{{etymology}}",
+        "legacy fallback html still works.",
+        "旧版兼容兜底 html。",
+    }
+    if lowered in placeholder_texts:
+        return False
+    return True
+
+
 def render_structured_etymology(entry: dict[str, Any]) -> str | None:
     origin_formula = ensure_str(entry.get("etymology_origin") or entry.get("etymology_formula")).strip()
     origin_note = ensure_str(entry.get("etymology_origin_note")).strip()
     chunks = as_list_of_dicts(entry.get("etymology_chunks"))
     development = as_list_of_dicts(entry.get("etymology_development"))
     cognates = as_list_of_dicts(entry.get("etymology_cognates"))
+    raw_etymology = ensure_str(entry.get("etymology")).strip()
 
     if not any((origin_formula, origin_note, chunks, development, cognates)):
         return None
@@ -198,10 +221,10 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
             note = html.escape(ensure_str(item.get("note")))
             relation = html.escape(ensure_str(item.get("relation")))
             cognate_cards.append(
-                "<article class=\"family-mini\">"
+                "<article class=\"etymology-cognate-card family-mini\">"
                 "<span class=\"family-label\">Family · 同族词</span>"
                 + (f"<h3>{term}</h3>" if term else "")
-                + (f"<p class=\"etymology-chunk-gloss\">{relation}</p>" if relation else "")
+                + (f"<p class=\"cognate-relation\">{relation}</p>" if relation else "")
                 + (f"<p>{note}</p>" if note else "")
                 + "</article>"
             )
@@ -210,6 +233,16 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
             "<span class=\"etymology-kicker\">Cognates · 同族词</span>"
             "<div class=\"etymology-cognate-list\">"
             + "".join(cognate_cards)
+            + "</div></section>"
+        )
+
+    has_structured_gaps = not all((chunks, development, cognates))
+    if has_structured_gaps and has_meaningful_etymology_html(raw_etymology):
+        parts.append(
+            "<section class=\"etymology-group etymology-supplement-group\">"
+            "<span class=\"etymology-kicker\">Additional Notes · 补充说明</span>"
+            "<div class=\"etymology-supplement\">"
+            + raw_etymology
             + "</div></section>"
         )
 
