@@ -118,7 +118,7 @@ For clearer etymology mapping, the renderer now also supports these optional str
 
 When those structured fields are present, the renderer will prefer them over the raw `etymology` HTML so that real chunks stay visually separate from meaning-development commentary.
 
-If the structured fields cover only part of the etymology lane, the existing raw `etymology` HTML is preserved under a collapsed `Additional Notes · 补充说明` block instead of being silently discarded.
+If the structured fields cover only part of the etymology lane, the existing raw `etymology` HTML is preserved under `Additional Notes · 补充说明`. Very short notes open by default; longer notes stay collapsed.
 
 Single entry:
 

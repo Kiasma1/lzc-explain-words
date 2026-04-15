@@ -25,6 +25,7 @@ REQUIRED_FIELDS = {
 
 MERMAID_SCRIPT_PLACEHOLDER = "{{MERMAID_SCRIPT_TAG}}"
 LOCAL_MERMAID_FILENAME = "mermaid.min.js"
+SUPPLEMENT_OPEN_TEXT_THRESHOLD = 140
 
 
 def parse_args() -> argparse.Namespace:
@@ -146,6 +147,10 @@ def has_meaningful_etymology_html(value: str) -> bool:
     return True
 
 
+def supplement_should_start_open(value: str) -> bool:
+    return len(extract_text_from_html(value)) <= SUPPLEMENT_OPEN_TEXT_THRESHOLD
+
+
 def render_structured_etymology(entry: dict[str, Any]) -> str | None:
     origin_formula = ensure_str(entry.get("etymology_origin") or entry.get("etymology_formula")).strip()
     origin_note = ensure_str(entry.get("etymology_origin_note")).strip()
@@ -238,9 +243,10 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
 
     has_structured_gaps = not all((chunks, development, cognates))
     if has_structured_gaps and has_meaningful_etymology_html(raw_etymology):
+        open_attr = " open" if supplement_should_start_open(raw_etymology) else ""
         parts.append(
             "<section class=\"etymology-group etymology-supplement-group\">"
-            "<details class=\"etymology-supplement-details\">"
+            + f"<details class=\"etymology-supplement-details\"{open_attr}>"
             "<summary class=\"etymology-supplement-summary\">"
             "<span class=\"etymology-kicker\">Additional Notes · 补充说明</span>"
             "<span class=\"etymology-supplement-toggle\" aria-hidden=\"true\"></span>"
