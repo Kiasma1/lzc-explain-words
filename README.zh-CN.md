@@ -118,7 +118,7 @@ python3 scripts/run_extreme_stress_test.py
 
 当这些结构化字段存在时，渲染器会优先使用它们，而不是直接渲染原始 `etymology` HTML。这样像真实词块、语义推进、修辞效果这几层信息就不会再混成一片。
 
-如果结构化字段只覆盖了词源区的一部分，原来的 `etymology` HTML 不会被静默丢弃，而会以下方 `Additional Notes · 补充说明` 区块继续保留。
+如果结构化字段只覆盖了词源区的一部分，原来的 `etymology` HTML 不会被静默丢弃，而会以下方默认折叠的 `Additional Notes · 补充说明` 区块继续保留。
 
 单个词条：
 

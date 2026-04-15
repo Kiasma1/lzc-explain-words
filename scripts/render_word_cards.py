@@ -240,10 +240,15 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
     if has_structured_gaps and has_meaningful_etymology_html(raw_etymology):
         parts.append(
             "<section class=\"etymology-group etymology-supplement-group\">"
+            "<details class=\"etymology-supplement-details\">"
+            "<summary class=\"etymology-supplement-summary\">"
             "<span class=\"etymology-kicker\">Additional Notes · 补充说明</span>"
+            "<span class=\"etymology-supplement-toggle\" aria-hidden=\"true\"></span>"
+            "</summary>"
             "<div class=\"etymology-supplement\">"
             + raw_etymology
-            + "</div></section>"
+            + "</div>"
+            "</details></section>"
         )
 
     return "".join(parts)
