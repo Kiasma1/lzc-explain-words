@@ -14,12 +14,12 @@
       "desktop_screenshot": "examples/extreme-stress/results/screenshots/desktop/word_card_deinstitutionalization.png",
       "desktop_size": {
         "width": 1440,
-        "height": 3075
+        "height": 3792
       },
       "mobile_screenshot": "examples/extreme-stress/results/screenshots/mobile/word_card_deinstitutionalization.mobile.png",
       "mobile_size": {
         "width": 1170,
-        "height": 10635
+        "height": 13251
       }
     },
     {
@@ -27,12 +27,12 @@
       "desktop_screenshot": "examples/extreme-stress/results/screenshots/desktop/word_card_floccinaucinihilipilification.png",
       "desktop_size": {
         "width": 1440,
-        "height": 3075
+        "height": 4110
       },
       "mobile_screenshot": "examples/extreme-stress/results/screenshots/mobile/word_card_floccinaucinihilipilification.mobile.png",
       "mobile_size": {
         "width": 1170,
-        "height": 10977
+        "height": 14307
       }
     },
     {
@@ -40,12 +40,12 @@
       "desktop_screenshot": "examples/extreme-stress/results/screenshots/desktop/word_card_honorificabilitudinitatibus.png",
       "desktop_size": {
         "width": 1440,
-        "height": 3075
+        "height": 4073
       },
       "mobile_screenshot": "examples/extreme-stress/results/screenshots/mobile/word_card_honorificabilitudinitatibus.mobile.png",
       "mobile_size": {
         "width": 1170,
-        "height": 10761
+        "height": 14013
       }
     },
     {
@@ -53,12 +53,12 @@
       "desktop_screenshot": "examples/extreme-stress/results/screenshots/desktop/word_card_otorhinolaryngological.png",
       "desktop_size": {
         "width": 1440,
-        "height": 2977
+        "height": 3617
       },
       "mobile_screenshot": "examples/extreme-stress/results/screenshots/mobile/word_card_otorhinolaryngological.mobile.png",
       "mobile_size": {
         "width": 1170,
-        "height": 10470
+        "height": 13086
       }
     },
     {
@@ -66,12 +66,12 @@
       "desktop_screenshot": "examples/extreme-stress/results/screenshots/desktop/word_card_psychoneuroendocrinological.png",
       "desktop_size": {
         "width": 1440,
-        "height": 3043
+        "height": 3683
       },
       "mobile_screenshot": "examples/extreme-stress/results/screenshots/mobile/word_card_psychoneuroendocrinological.mobile.png",
       "mobile_size": {
         "width": 1170,
-        "height": 11097
+        "height": 13944
       }
     },
     {
@@ -79,12 +79,12 @@
       "desktop_screenshot": "examples/extreme-stress/results/screenshots/desktop/word_card_thyroparathyroidectomized.png",
       "desktop_size": {
         "width": 1440,
-        "height": 3043
+        "height": 3683
       },
       "mobile_screenshot": "examples/extreme-stress/results/screenshots/mobile/word_card_thyroparathyroidectomized.mobile.png",
       "mobile_size": {
         "width": 1170,
-        "height": 11037
+        "height": 13740
       }
     }
   ],

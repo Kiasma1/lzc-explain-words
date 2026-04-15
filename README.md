@@ -94,6 +94,30 @@ Evidence captured in-repo:
 
 ## Input Shape
 
+Required base fields remain:
+
+- `word`
+- `phonetic`
+- `definition_deep`
+- `etymology`
+- `nuance_text`
+- `example_sentence`
+- `epiphany`
+- `mermaid_code`
+
+`etymology` still accepts raw HTML for backward compatibility.
+
+For clearer etymology mapping, the renderer now also supports these optional structured fields:
+
+- `etymology_origin` — compact origin formula such as `flocci + nauci + nihili + pili + -fication`
+- `etymology_formula` — legacy alias of `etymology_origin`
+- `etymology_origin_note` — short note explaining the overall source pattern
+- `etymology_chunks` — actual morpheme/chunk cards, each with `form`, `gloss`, `explanation`, optional `role`
+- `etymology_development` — semantic build-up stages, each with `label`, `title`, `explanation`, optional `kind`
+- `etymology_cognates` — cognate/family cards, each with `term`, `note`, optional `relation`
+
+When those structured fields are present, the renderer will prefer them over the raw `etymology` HTML so that real chunks stay visually separate from meaning-development commentary.
+
 Single entry:
 
 ```json
@@ -106,6 +130,46 @@ Single entry:
   "example_sentence": "She quoted a brief excerpt.",
   "epiphany": "An excerpt is a chosen window. 摘录是被选择出来的一扇窗。",
   "mermaid_code": "graph TD\\nA[whole text] --> B[selected passage]"
+}
+```
+
+Single entry with structured etymology:
+
+```json
+{
+  "word": "Floccinaucinihilipilification",
+  "phonetic": "ˌflɒk.sɪ.nɔː.sɪˌnaɪ.hɪ.lɪˌpɪl.ɪ.fɪˈkeɪ.ʃən",
+  "definition_deep": "<p>...</p>",
+  "etymology": "<p>Legacy fallback HTML still works.</p>",
+  "etymology_origin": "flocci + nauci + nihili + pili + -fication",
+  "etymology_origin_note": "A learned stack of low-value Latin forms plus a nominalizing suffix.",
+  "etymology_chunks": [
+    {
+      "form": "flocci",
+      "gloss": "of little value",
+      "explanation": "Starts the downward valuation.",
+      "role": "chunk"
+    }
+  ],
+  "etymology_development": [
+    {
+      "label": "Step 1",
+      "title": "semantic move",
+      "explanation": "Multiple low-value forms reinforce the same belittling judgment.",
+      "kind": "meaning build-up"
+    }
+  ],
+  "etymology_cognates": [
+    {
+      "term": "nil",
+      "relation": "shared low-value idea",
+      "note": "Modern English echo of the zero-value sense."
+    }
+  ],
+  "nuance_text": "<ul class=\"nuance-list\"><li class=\"nuance-item\">...</li></ul>",
+  "example_sentence": "He treated the objection with floccinaucinihilipilification.",
+  "epiphany": "A giant word can dramatize a tiny valuation. 冗长本身，也能参与轻视的语气。",
+  "mermaid_code": "graph TD\\nA[low value] --> B[stacked learned forms] --> C[performative dismissal]"
 }
 ```
 

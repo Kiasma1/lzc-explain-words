@@ -41,6 +41,7 @@ Assistant: [Calls lzc-explain-words with the three words, generates three cards 
    * **Etymology (词源)**: 
      - 拆解词根（拉丁/希腊）。
      - 列举 2-3 个同源词（Cognates），展示它们之间的逻辑联系（例如 Cube/Concubine/Incubate 都有"躺/卧"的含义）。
+     - 优先把“真实词块”和“整体义演化”分开组织：不要把语义阶段说明伪装成词块本身。
    
    * **Nuance (语感)**: 
      - **对比**: 选取 1-2 个易混淆词（例如 Incubate vs Nurture）。
@@ -64,6 +65,13 @@ Assistant: [Calls lzc-explain-words with the three words, generates three cards 
    * `example_sentence`
    * `epiphany`
    * `mermaid_code`
+   
+   如能提升词源可读性，优先额外补充这些可选字段（渲染器会优先使用）：
+   * `etymology_origin`
+   * `etymology_origin_note`
+   * `etymology_chunks`
+   * `etymology_development`
+   * `etymology_cognates`
 
 4. **渲染卡片**
    使用结构化数据替换模版变量：

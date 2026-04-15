@@ -284,32 +284,73 @@
     line-height: 1.82;
   }
 
-  .etymology-content > p:first-child {
-    margin-bottom: 16px;
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(29, 78, 216, 0.10);
-    background: linear-gradient(180deg, rgba(29, 78, 216, 0.05), rgba(255, 255, 255, 0.92));
-    color: #334155;
-    line-height: 1.75;
-  }
-
-  .etymology-content ul,
-  .nuance-list {
-    margin: 14px 0 0;
-    padding-left: 20px;
-  }
-
-  .etymology-content li,
-  .nuance-item {
-    margin-bottom: 10px;
-  }
-
-  .stage,
-  .family-mini {
+  .etymology-origin,
+  .etymology-group {
     margin-top: 14px;
   }
 
+  .etymology-origin {
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(29, 78, 216, 0.10);
+    background: linear-gradient(180deg, rgba(29, 78, 216, 0.05), rgba(255, 255, 255, 0.92));
+  }
+
+  .etymology-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .etymology-kicker::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+  }
+
+  .etymology-origin-formula {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.55;
+    font-weight: 700;
+    color: #0f172a;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .etymology-origin-note {
+    margin: 10px 0 0;
+    color: #475569;
+    line-height: 1.75;
+  }
+
+  .etymology-chunk-grid,
+  .etymology-cognate-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .etymology-chunk-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .etymology-development-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .etymology-chunk-card,
+  .etymology-development-card,
   .stage-inner,
   .family-mini {
     border-radius: 18px;
@@ -318,14 +359,12 @@
     box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
   }
 
-  .stage-inner {
-    display: grid;
-    grid-template-columns: minmax(132px, 0.95fr) minmax(0, 1.7fr);
-    gap: 10px 16px;
-    align-items: start;
+  .etymology-chunk-card,
+  .etymology-development-card {
     padding: 14px 16px;
   }
 
+  .etymology-chip,
   .stage-label,
   .family-label {
     display: inline-flex;
@@ -339,6 +378,7 @@
     font-weight: 700;
   }
 
+  .etymology-chip::before,
   .stage-label::before,
   .family-label::before {
     content: "";
@@ -348,19 +388,57 @@
     background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
   }
 
-  .stage-inner .stage-label {
-    grid-column: 1 / -1;
-  }
-
+  .etymology-chunk-card h3,
+  .etymology-development-card h3,
   .stage-inner h3,
   .family-mini h3 {
-    margin: 0;
+    margin: 10px 0 0;
     font-size: 15px;
     line-height: 1.45;
     font-weight: 700;
     color: #0f172a;
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  .etymology-chunk-gloss {
+    margin: 8px 0 0;
+    color: var(--accent-blue);
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .etymology-chunk-note,
+  .etymology-development-card p,
+  .stage-inner p,
+  .family-mini p {
+    margin: 8px 0 0;
+    color: #475569;
+    line-height: 1.78;
+  }
+
+  .etymology-content ul,
+  .nuance-list {
+    margin: 14px 0 0;
+    padding-left: 20px;
+  }
+
+  .etymology-content li,
+  .nuance-item {
+    margin-bottom: 10px;
+  }
+
+  .stage-inner {
+    display: grid;
+    grid-template-columns: minmax(132px, 0.95fr) minmax(0, 1.7fr);
+    gap: 10px 16px;
+    align-items: start;
+    padding: 14px 16px;
+  }
+
+  .stage-inner .stage-label {
+    grid-column: 1 / -1;
   }
 
   .stage-inner h3 {
@@ -373,13 +451,6 @@
     border: 1px solid rgba(148, 163, 184, 0.26);
     background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
     text-align: center;
-  }
-
-  .stage-inner p,
-  .family-mini p {
-    margin: 0;
-    color: #475569;
-    line-height: 1.78;
   }
 
   .family-mini {
@@ -628,8 +699,13 @@
       font-size: 14px;
     }
 
+    .etymology-chunk-grid {
+      grid-template-columns: 1fr;
+    }
+
     .stage-inner,
-    .family-mini {
+    .family-mini,
+    .etymology-cognate-list {
       grid-template-columns: 1fr;
       gap: 8px;
     }
@@ -695,7 +771,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          <p><b>Origin:</b> oto + rhino + laryngo + logical</p><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 1 · 听觉区域</span><h3>oto</h3><p>耳部进入专科视野。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 2 · 鼻部区域</span><h3>rhino</h3><p>再把鼻腔系统并进来。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 3 · 喉部区域</span><h3>laryngo</h3><p>最后把发声与气道区域连上。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 4 · 学科形容词</span><h3>specialty adjective</h3><p>形成一个联合专科的描述词。</p></div></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>oto-</h3><p>耳。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>rhino-</h3><p>鼻。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>laryngo-</h3><p>喉。</p></article>
+          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">oto + rhino + laryngo + logical</div><p class="etymology-origin-note">这个词本质上是把耳、鼻、喉三块解剖区域直接并列，再压成一个专科形容词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>oto</h3><p class="etymology-chunk-gloss">ear</p><p class="etymology-chunk-note">先把耳部系统放进专科视野。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>rhino</h3><p class="etymology-chunk-gloss">nose</p><p class="etymology-chunk-note">再把鼻部系统并进来。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>laryngo</h3><p class="etymology-chunk-gloss">larynx / throat</p><p class="etymology-chunk-note">最后把喉与发声/气道区域接上。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">suffix</span><h3>logical</h3><p class="etymology-chunk-gloss">relating to a field of study</p><p class="etymology-chunk-note">把前面的解剖并列收成一个学科性形容词。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>anatomical stacking</h3><p>词块不是递进抽象，而是先把三个身体区域直接摞在一起。</p></article><article class="etymology-development-card"><span class="etymology-chip">field formation</span><span class="stage-label">Step 2</span><h3>specialty formation</h3><p>再由形容词结尾把它们收束成一个联合专科。</p></article><article class="etymology-development-card"><span class="etymology-chip">reading cue</span><span class="stage-label">Step 3</span><h3>reader effect</h3><p>所以它的长度感来自“解剖区域堆叠”，而不是复杂哲学抽象。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>otology</h3><p class="etymology-chunk-gloss">ear-specific branch</p><p>只看耳部。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>rhinology</h3><p class="etymology-chunk-gloss">nose-specific branch</p><p>只看鼻部。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>laryngology</h3><p class="etymology-chunk-gloss">throat-specific branch</p><p>只看喉部。</p></article></div></section>
         </div>
       </section>
     </div>

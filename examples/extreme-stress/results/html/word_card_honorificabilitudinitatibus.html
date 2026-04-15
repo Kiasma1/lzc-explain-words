@@ -284,32 +284,73 @@
     line-height: 1.82;
   }
 
-  .etymology-content > p:first-child {
-    margin-bottom: 16px;
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(29, 78, 216, 0.10);
-    background: linear-gradient(180deg, rgba(29, 78, 216, 0.05), rgba(255, 255, 255, 0.92));
-    color: #334155;
-    line-height: 1.75;
-  }
-
-  .etymology-content ul,
-  .nuance-list {
-    margin: 14px 0 0;
-    padding-left: 20px;
-  }
-
-  .etymology-content li,
-  .nuance-item {
-    margin-bottom: 10px;
-  }
-
-  .stage,
-  .family-mini {
+  .etymology-origin,
+  .etymology-group {
     margin-top: 14px;
   }
 
+  .etymology-origin {
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(29, 78, 216, 0.10);
+    background: linear-gradient(180deg, rgba(29, 78, 216, 0.05), rgba(255, 255, 255, 0.92));
+  }
+
+  .etymology-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .etymology-kicker::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+  }
+
+  .etymology-origin-formula {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.55;
+    font-weight: 700;
+    color: #0f172a;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .etymology-origin-note {
+    margin: 10px 0 0;
+    color: #475569;
+    line-height: 1.75;
+  }
+
+  .etymology-chunk-grid,
+  .etymology-cognate-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .etymology-chunk-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .etymology-development-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .etymology-chunk-card,
+  .etymology-development-card,
   .stage-inner,
   .family-mini {
     border-radius: 18px;
@@ -318,14 +359,12 @@
     box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
   }
 
-  .stage-inner {
-    display: grid;
-    grid-template-columns: minmax(132px, 0.95fr) minmax(0, 1.7fr);
-    gap: 10px 16px;
-    align-items: start;
+  .etymology-chunk-card,
+  .etymology-development-card {
     padding: 14px 16px;
   }
 
+  .etymology-chip,
   .stage-label,
   .family-label {
     display: inline-flex;
@@ -339,6 +378,7 @@
     font-weight: 700;
   }
 
+  .etymology-chip::before,
   .stage-label::before,
   .family-label::before {
     content: "";
@@ -348,19 +388,57 @@
     background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
   }
 
-  .stage-inner .stage-label {
-    grid-column: 1 / -1;
-  }
-
+  .etymology-chunk-card h3,
+  .etymology-development-card h3,
   .stage-inner h3,
   .family-mini h3 {
-    margin: 0;
+    margin: 10px 0 0;
     font-size: 15px;
     line-height: 1.45;
     font-weight: 700;
     color: #0f172a;
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  .etymology-chunk-gloss {
+    margin: 8px 0 0;
+    color: var(--accent-blue);
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .etymology-chunk-note,
+  .etymology-development-card p,
+  .stage-inner p,
+  .family-mini p {
+    margin: 8px 0 0;
+    color: #475569;
+    line-height: 1.78;
+  }
+
+  .etymology-content ul,
+  .nuance-list {
+    margin: 14px 0 0;
+    padding-left: 20px;
+  }
+
+  .etymology-content li,
+  .nuance-item {
+    margin-bottom: 10px;
+  }
+
+  .stage-inner {
+    display: grid;
+    grid-template-columns: minmax(132px, 0.95fr) minmax(0, 1.7fr);
+    gap: 10px 16px;
+    align-items: start;
+    padding: 14px 16px;
+  }
+
+  .stage-inner .stage-label {
+    grid-column: 1 / -1;
   }
 
   .stage-inner h3 {
@@ -373,13 +451,6 @@
     border: 1px solid rgba(148, 163, 184, 0.26);
     background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
     text-align: center;
-  }
-
-  .stage-inner p,
-  .family-mini p {
-    margin: 0;
-    color: #475569;
-    line-height: 1.78;
   }
 
   .family-mini {
@@ -628,8 +699,13 @@
       font-size: 14px;
     }
 
+    .etymology-chunk-grid {
+      grid-template-columns: 1fr;
+    }
+
     .stage-inner,
-    .family-mini {
+    .family-mini,
+    .etymology-cognate-list {
       grid-template-columns: 1fr;
       gap: 8px;
     }
@@ -695,7 +771,7 @@
       <section class="card">
         <div class="card-label">Etymology · 词源</div>
         <div class="etymology-content">
-          <p><b>Origin:</b> Latin scholastic abstraction chain</p><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 1 · 荣誉核心</span><h3>honor</h3><p>先有社会性承认。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 2 · 可得资格</span><h3>honorificabilis</h3><p>再长出“可被授荣”的性质。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 3 · 抽象化</span><h3>-tudo / -tas layers</h3><p>把性质进一步名词化、制度化。</p></div></article><article class="stage"><div class="stage-inner"><span class="stage-label">Stage 4 · 历史语感</span><h3>scholastic prestige noun</h3><p>最后形成一种带表演性的学术长词。</p></div></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>honor</h3><p>荣誉与认可的中心词。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>-fic</h3><p>使成、造成某种状态。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>dignity</h3><p>更现代、更常见的尊严框架。</p></article>
+          <section class="etymology-origin"><span class="etymology-kicker">Origin Formula · 构词公式</span><div class="etymology-origin-formula">honor + -ific- + -abil- + -tudin- + -itatibus</div><p class="etymology-origin-note">它不是单个简单词根，而是一串把“荣誉资格”层层抽象化、名词化的拉丁化长构词。</p></section><section class="etymology-group"><span class="etymology-kicker">Word Chunks · 词块对应</span><div class="etymology-chunk-grid"><article class="etymology-chunk-card"><span class="etymology-chip">root</span><h3>honor</h3><p class="etymology-chunk-gloss">honor</p><p class="etymology-chunk-note">核心从“荣誉、被承认”开始。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">forming element</span><h3>-ific-</h3><p class="etymology-chunk-gloss">making / causing</p><p class="etymology-chunk-note">加入“使成某种状态”的力量。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">capacity marker</span><h3>-abil-</h3><p class="etymology-chunk-gloss">able / capable of</p><p class="etymology-chunk-note">把它推进成“有资格被授予”的意思。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">abstraction</span><h3>-tudin-</h3><p class="etymology-chunk-gloss">state / condition</p><p class="etymology-chunk-note">把这种资格再抽象成一种状态。</p></article><article class="etymology-chunk-card"><span class="etymology-chip">ending</span><h3>-itatibus</h3><p class="etymology-chunk-gloss">formal pluralized nominal ending</p><p class="etymology-chunk-note">让整词带上中古学术拉丁式的制度化、书卷化外壳。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Meaning Build-up · 整体义怎么长出来</span><div class="etymology-development-list"><article class="etymology-development-card"><span class="etymology-chip">meaning build-up</span><span class="stage-label">Step 1</span><h3>from honor to honor-worthy capacity</h3><p>词义先从“荣誉”长成“可被授予荣誉的资格”。</p></article><article class="etymology-development-card"><span class="etymology-chip">abstraction</span><span class="stage-label">Step 2</span><h3>from capacity to abstract status</h3><p>后缀层层叠加，把具体资格推进成抽象、正式、制度化的状态名词。</p></article><article class="etymology-development-card"><span class="etymology-chip">rhetorical effect</span><span class="stage-label">Step 3</span><h3>rhetorical effect</h3><p>因此它读起来不像日常词，而像一个故意摆出学识重量的历史长词。</p></article></div></section><section class="etymology-group"><span class="etymology-kicker">Cognates · 同族词</span><div class="etymology-cognate-list"><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>honor</h3><p class="etymology-chunk-gloss">shared root</p><p>荣誉与认可的中心词。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>honorific</h3><p class="etymology-chunk-gloss">closer modern cousin</p><p>更常见、更短的现代相关词。</p></article><article class="family-mini"><span class="family-label">Family · 同族词</span><h3>dignity</h3><p class="etymology-chunk-gloss">semantic neighbor</p><p>更现代地表达“尊严、可受敬重”的框架。</p></article></div></section>
         </div>
       </section>
     </div>

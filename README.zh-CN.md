@@ -94,6 +94,30 @@ python3 scripts/run_extreme_stress_test.py
 
 ## 输入结构
 
+基础必填字段仍然是：
+
+- `word`
+- `phonetic`
+- `definition_deep`
+- `etymology`
+- `nuance_text`
+- `example_sentence`
+- `epiphany`
+- `mermaid_code`
+
+其中 `etymology` 继续兼容原来的原始 HTML，旧数据不用迁移也能渲染。
+
+为了让“真实词块”和“整体义演化”更清楚地分开，渲染器现在额外支持这些可选结构化字段：
+
+- `etymology_origin` —— 构词公式，例如 `flocci + nauci + nihili + pili + -fication`
+- `etymology_formula` —— `etymology_origin` 的兼容别名
+- `etymology_origin_note` —— 对整条来源路径的简短说明
+- `etymology_chunks` —— 真实词块卡片数组；每项可含 `form`、`gloss`、`explanation`、可选 `role`
+- `etymology_development` —— “整体义怎么长出来”的阶段数组；每项可含 `label`、`title`、`explanation`、可选 `kind`
+- `etymology_cognates` —— 同族词卡片数组；每项可含 `term`、`note`、可选 `relation`
+
+当这些结构化字段存在时，渲染器会优先使用它们，而不是直接渲染原始 `etymology` HTML。这样像真实词块、语义推进、修辞效果这几层信息就不会再混成一片。
+
 单个词条：
 
 ```json
@@ -106,6 +130,46 @@ python3 scripts/run_extreme_stress_test.py
   "example_sentence": "She quoted a brief excerpt.",
   "epiphany": "An excerpt is a chosen window. 摘录是被选择出来的一扇窗。",
   "mermaid_code": "graph TD\\nA[whole text] --> B[selected passage]"
+}
+```
+
+带结构化词源字段的单词示例：
+
+```json
+{
+  "word": "Floccinaucinihilipilification",
+  "phonetic": "ˌflɒk.sɪ.nɔː.sɪˌnaɪ.hɪ.lɪˌpɪl.ɪ.fɪˈkeɪ.ʃən",
+  "definition_deep": "<p>...</p>",
+  "etymology": "<p>旧版兼容兜底 HTML。</p>",
+  "etymology_origin": "flocci + nauci + nihili + pili + -fication",
+  "etymology_origin_note": "多个表示“价值极低”的拉丁来源叠在一起，最后接名词后缀。",
+  "etymology_chunks": [
+    {
+      "form": "flocci",
+      "gloss": "of little value",
+      "explanation": "先把价值往下压一层。",
+      "role": "chunk"
+    }
+  ],
+  "etymology_development": [
+    {
+      "label": "Step 1",
+      "title": "semantic move",
+      "explanation": "多个低价值词块连续堆叠，强化“轻视”的判定动作。",
+      "kind": "meaning build-up"
+    }
+  ],
+  "etymology_cognates": [
+    {
+      "term": "nil",
+      "relation": "shared low-value idea",
+      "note": "现代英语里更直接的“零、无价值”回声。"
+    }
+  ],
+  "nuance_text": "<ul class=\"nuance-list\"><li class=\"nuance-item\">...</li></ul>",
+  "example_sentence": "He treated the objection with floccinaucinihilipilification.",
+  "epiphany": "A giant word can dramatize a tiny valuation. 冗长本身，也能参与轻视的语气。",
+  "mermaid_code": "graph TD\\nA[low value] --> B[stacked learned forms] --> C[performative dismissal]"
 }
 ```
 

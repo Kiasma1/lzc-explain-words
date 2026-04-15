@@ -9,6 +9,7 @@ import re
 import shutil
 import unicodedata
 from pathlib import Path
+from typing import Any
 
 
 REQUIRED_FIELDS = {
@@ -35,7 +36,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def normalize_entries(raw: object) -> list[dict[str, str]]:
+def normalize_entries(raw: object) -> list[dict[str, Any]]:
     if isinstance(raw, dict):
         raw_entries = raw.get("entries", raw)
         if isinstance(raw_entries, dict):
@@ -45,16 +46,19 @@ def normalize_entries(raw: object) -> list[dict[str, str]]:
     else:
         raise ValueError("Input JSON must be an object or an array.")
 
-    entries: list[dict[str, str]] = []
+    entries: list[dict[str, Any]] = []
     for index, item in enumerate(raw_entries, start=1):
         if not isinstance(item, dict):
             raise ValueError(f"Entry {index} must be an object.")
-        normalized: dict[str, str] = {}
+        normalized: dict[str, Any] = {}
         for field in REQUIRED_FIELDS:
             value = item.get(field)
             if value is None:
                 raise ValueError(f"Entry {index} is missing required field: {field}")
             normalized[field] = str(value)
+        for key, value in item.items():
+            if key not in normalized:
+                normalized[key] = value
         entries.append(normalized)
     return entries
 
@@ -110,15 +114,121 @@ def inject_runtime_assets(document: str) -> str:
     )
 
 
-def render_entry(template: str, entry: dict[str, str]) -> str:
+def ensure_str(value: Any) -> str:
+    return "" if value is None else str(value)
+
+
+def as_list_of_dicts(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    return [item for item in value if isinstance(item, dict)]
+
+
+def render_structured_etymology(entry: dict[str, Any]) -> str | None:
+    origin_formula = ensure_str(entry.get("etymology_origin") or entry.get("etymology_formula")).strip()
+    origin_note = ensure_str(entry.get("etymology_origin_note")).strip()
+    chunks = as_list_of_dicts(entry.get("etymology_chunks"))
+    development = as_list_of_dicts(entry.get("etymology_development"))
+    cognates = as_list_of_dicts(entry.get("etymology_cognates"))
+
+    if not any((origin_formula, origin_note, chunks, development, cognates)):
+        return None
+
+    parts: list[str] = []
+
+    if origin_formula or origin_note:
+        origin_html = ['<section class="etymology-origin">', '<span class="etymology-kicker">Origin Formula · 构词公式</span>']
+        if origin_formula:
+            origin_html.append(f'<div class="etymology-origin-formula">{html.escape(origin_formula)}</div>')
+        if origin_note:
+            origin_html.append(f'<p class="etymology-origin-note">{html.escape(origin_note)}</p>')
+        origin_html.append('</section>')
+        parts.append("".join(origin_html))
+
+    if chunks:
+        chunk_cards = []
+        for item in chunks:
+            form = html.escape(ensure_str(item.get("form")))
+            gloss = html.escape(ensure_str(item.get("gloss")))
+            explanation = html.escape(ensure_str(item.get("explanation")))
+            role = html.escape(ensure_str(item.get("role")))
+            chunk_cards.append(
+                "<article class=\"etymology-chunk-card\">"
+                + (f"<span class=\"etymology-chip\">{role}</span>" if role else "")
+                + f"<h3>{form}</h3>"
+                + (f"<p class=\"etymology-chunk-gloss\">{gloss}</p>" if gloss else "")
+                + (f"<p class=\"etymology-chunk-note\">{explanation}</p>" if explanation else "")
+                + "</article>"
+            )
+        parts.append(
+            "<section class=\"etymology-group\">"
+            "<span class=\"etymology-kicker\">Word Chunks · 词块对应</span>"
+            "<div class=\"etymology-chunk-grid\">"
+            + "".join(chunk_cards)
+            + "</div></section>"
+        )
+
+    if development:
+        dev_cards = []
+        for item in development:
+            label = html.escape(ensure_str(item.get("label")))
+            title = html.escape(ensure_str(item.get("title")))
+            explanation = html.escape(ensure_str(item.get("explanation")))
+            kind = html.escape(ensure_str(item.get("kind")))
+            dev_cards.append(
+                "<article class=\"etymology-development-card\">"
+                + (f"<span class=\"etymology-chip\">{kind}</span>" if kind else "")
+                + (f"<span class=\"stage-label\">{label}</span>" if label else "")
+                + (f"<h3>{title}</h3>" if title else "")
+                + (f"<p>{explanation}</p>" if explanation else "")
+                + "</article>"
+            )
+        parts.append(
+            "<section class=\"etymology-group\">"
+            "<span class=\"etymology-kicker\">Meaning Build-up · 整体义怎么长出来</span>"
+            "<div class=\"etymology-development-list\">"
+            + "".join(dev_cards)
+            + "</div></section>"
+        )
+
+    if cognates:
+        cognate_cards = []
+        for item in cognates:
+            term = html.escape(ensure_str(item.get("term")))
+            note = html.escape(ensure_str(item.get("note")))
+            relation = html.escape(ensure_str(item.get("relation")))
+            cognate_cards.append(
+                "<article class=\"family-mini\">"
+                "<span class=\"family-label\">Family · 同族词</span>"
+                + (f"<h3>{term}</h3>" if term else "")
+                + (f"<p class=\"etymology-chunk-gloss\">{relation}</p>" if relation else "")
+                + (f"<p>{note}</p>" if note else "")
+                + "</article>"
+            )
+        parts.append(
+            "<section class=\"etymology-group\">"
+            "<span class=\"etymology-kicker\">Cognates · 同族词</span>"
+            "<div class=\"etymology-cognate-list\">"
+            + "".join(cognate_cards)
+            + "</div></section>"
+        )
+
+    return "".join(parts)
+
+
+def render_entry(template: str, entry: dict[str, Any]) -> str:
+    entry = dict(entry)
+    structured_etymology = render_structured_etymology(entry)
+    if structured_etymology:
+        entry["etymology"] = structured_etymology
     rendered = template
     for field, placeholder in REQUIRED_FIELDS.items():
-        rendered = rendered.replace(placeholder, entry[field])
+        rendered = rendered.replace(placeholder, ensure_str(entry[field]))
     rendered = inject_runtime_assets(rendered)
     return inject_ready_script(rendered)
 
 
-def build_index(entries: list[dict[str, str]], outputs: list[Path]) -> str:
+def build_index(entries: list[dict[str, Any]], outputs: list[Path]) -> str:
     items = []
     for entry, output in zip(entries, outputs):
         items.append(

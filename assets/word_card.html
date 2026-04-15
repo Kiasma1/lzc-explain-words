@@ -284,32 +284,73 @@
     line-height: 1.82;
   }
 
-  .etymology-content > p:first-child {
-    margin-bottom: 16px;
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(29, 78, 216, 0.10);
-    background: linear-gradient(180deg, rgba(29, 78, 216, 0.05), rgba(255, 255, 255, 0.92));
-    color: #334155;
-    line-height: 1.75;
-  }
-
-  .etymology-content ul,
-  .nuance-list {
-    margin: 14px 0 0;
-    padding-left: 20px;
-  }
-
-  .etymology-content li,
-  .nuance-item {
-    margin-bottom: 10px;
-  }
-
-  .stage,
-  .family-mini {
+  .etymology-origin,
+  .etymology-group {
     margin-top: 14px;
   }
 
+  .etymology-origin {
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(29, 78, 216, 0.10);
+    background: linear-gradient(180deg, rgba(29, 78, 216, 0.05), rgba(255, 255, 255, 0.92));
+  }
+
+  .etymology-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .etymology-kicker::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+  }
+
+  .etymology-origin-formula {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.55;
+    font-weight: 700;
+    color: #0f172a;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .etymology-origin-note {
+    margin: 10px 0 0;
+    color: #475569;
+    line-height: 1.75;
+  }
+
+  .etymology-chunk-grid,
+  .etymology-cognate-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .etymology-chunk-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .etymology-development-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .etymology-chunk-card,
+  .etymology-development-card,
   .stage-inner,
   .family-mini {
     border-radius: 18px;
@@ -318,14 +359,12 @@
     box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
   }
 
-  .stage-inner {
-    display: grid;
-    grid-template-columns: minmax(132px, 0.95fr) minmax(0, 1.7fr);
-    gap: 10px 16px;
-    align-items: start;
+  .etymology-chunk-card,
+  .etymology-development-card {
     padding: 14px 16px;
   }
 
+  .etymology-chip,
   .stage-label,
   .family-label {
     display: inline-flex;
@@ -339,6 +378,7 @@
     font-weight: 700;
   }
 
+  .etymology-chip::before,
   .stage-label::before,
   .family-label::before {
     content: "";
@@ -348,19 +388,57 @@
     background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
   }
 
-  .stage-inner .stage-label {
-    grid-column: 1 / -1;
-  }
-
+  .etymology-chunk-card h3,
+  .etymology-development-card h3,
   .stage-inner h3,
   .family-mini h3 {
-    margin: 0;
+    margin: 10px 0 0;
     font-size: 15px;
     line-height: 1.45;
     font-weight: 700;
     color: #0f172a;
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  .etymology-chunk-gloss {
+    margin: 8px 0 0;
+    color: var(--accent-blue);
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .etymology-chunk-note,
+  .etymology-development-card p,
+  .stage-inner p,
+  .family-mini p {
+    margin: 8px 0 0;
+    color: #475569;
+    line-height: 1.78;
+  }
+
+  .etymology-content ul,
+  .nuance-list {
+    margin: 14px 0 0;
+    padding-left: 20px;
+  }
+
+  .etymology-content li,
+  .nuance-item {
+    margin-bottom: 10px;
+  }
+
+  .stage-inner {
+    display: grid;
+    grid-template-columns: minmax(132px, 0.95fr) minmax(0, 1.7fr);
+    gap: 10px 16px;
+    align-items: start;
+    padding: 14px 16px;
+  }
+
+  .stage-inner .stage-label {
+    grid-column: 1 / -1;
   }
 
   .stage-inner h3 {
@@ -373,13 +451,6 @@
     border: 1px solid rgba(148, 163, 184, 0.26);
     background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
     text-align: center;
-  }
-
-  .stage-inner p,
-  .family-mini p {
-    margin: 0;
-    color: #475569;
-    line-height: 1.78;
   }
 
   .family-mini {
@@ -628,8 +699,13 @@
       font-size: 14px;
     }
 
+    .etymology-chunk-grid {
+      grid-template-columns: 1fr;
+    }
+
     .stage-inner,
-    .family-mini {
+    .family-mini,
+    .etymology-cognate-list {
       grid-template-columns: 1fr;
       gap: 8px;
     }

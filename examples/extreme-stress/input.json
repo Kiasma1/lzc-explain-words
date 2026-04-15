@@ -7,7 +7,72 @@
     "nuance_text": "<article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">deinstitutionalization vs discharge</h3><p>discharge 只是出院；这个词说的是长期制度安排被拆解。</p><div class=\"tag-row\"><span class=\"tag\">single release</span><span class=\"tag\">system reform</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">deinstitutionalization vs community care</h3><p>后者是替代方向；前者强调从机构框架里退出本身。</p><div class=\"tag-row\"><span class=\"tag\">replacement model</span><span class=\"tag\">withdrawal process</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Usage · 用法</span><h3 class=\"contrast-title\">used in policy and mental-health history</h3><p>常出现在公共政策、精神卫生史和社会服务评估里。</p><div class=\"tag-row\"><span class=\"tag\">policy history</span><span class=\"tag\">implementation gap</span></div></article>",
     "example_sentence": "Think of deinstitutionalization as 'shift people out of institutional containment' unfolding into two pressure-tested semantic branches.",
     "epiphany": "Policy words become long when they carry both structural hope and structural risk at once. 政策词会变长，往往是因为它同时背着结构性的希望和结构性的风险。",
-    "mermaid_code": "graph TD\n    A[de + institutional + -ization] --> B[shift people out of institutional containment]\n    B --> C[policy move away from custodial institutional housing]\n    B --> D[contested reform narrative with social tradeoffs]\n    C --> E[左边不是单纯搬地方，而是从“大机构集中安置”转向社区支持、门诊服务与更分散的生活安排。]\n    D --> F[右边则提醒你：它常伴随争议，因为机构退出不一定自动等于支持到位，政策语言和现实结果可能分叉。]"
+    "mermaid_code": "graph TD\n    A[de + institutional + -ization] --> B[shift people out of institutional containment]\n    B --> C[policy move away from custodial institutional housing]\n    B --> D[contested reform narrative with social tradeoffs]\n    C --> E[左边不是单纯搬地方，而是从“大机构集中安置”转向社区支持、门诊服务与更分散的生活安排。]\n    D --> F[右边则提醒你：它常伴随争议，因为机构退出不一定自动等于支持到位，政策语言和现实结果可能分叉。]",
+    "etymology_origin": "de + institution + -al + -ization",
+    "etymology_origin_note": "这个词最重要的不是单个小词块，而是“从机构框架里退出”被做成了一个政策过程名词。",
+    "etymology_chunks": [
+      {
+        "form": "de-",
+        "gloss": "out of / away from",
+        "explanation": "给整个词加上“退出、拆离”的方向。",
+        "role": "prefix"
+      },
+      {
+        "form": "institution",
+        "gloss": "institution / organized system",
+        "explanation": "核心容器是一个制度化、集中化的机构框架。",
+        "role": "root"
+      },
+      {
+        "form": "-al",
+        "gloss": "relating to",
+        "explanation": "把机构先转成形容性质。",
+        "role": "linking suffix"
+      },
+      {
+        "form": "-ization",
+        "gloss": "process / policy movement",
+        "explanation": "最后把整个方向收成一个长期过程，而不是一次动作。",
+        "role": "process suffix"
+      }
+    ],
+    "etymology_development": [
+      {
+        "label": "Step 1",
+        "title": "from institution to institutional",
+        "explanation": "先把“机构”变成一种制度化安排。",
+        "kind": "meaning build-up"
+      },
+      {
+        "label": "Step 2",
+        "title": "from institutional to de-institutional",
+        "explanation": "再通过 de- 明确方向：从这种安排里退出。",
+        "kind": "direction shift"
+      },
+      {
+        "label": "Step 3",
+        "title": "from direction to policy process",
+        "explanation": "最后通过 -ization 把退出动作扩展成一整套政策与历史过程。",
+        "kind": "final sense"
+      }
+    ],
+    "etymology_cognates": [
+      {
+        "term": "institution",
+        "relation": "shared root",
+        "note": "制度化容器。"
+      },
+      {
+        "term": "institutional",
+        "relation": "intermediate form",
+        "note": "从机构到制度安排的中间层。"
+      },
+      {
+        "term": "community care",
+        "relation": "semantic neighbor",
+        "note": "去机构化后的常见替代方向。"
+      }
+    ]
   },
   {
     "word": "floccinaucinihilipilification",
@@ -17,7 +82,78 @@
     "nuance_text": "<article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">floccinaucinihilipilification vs dismissal</h3><p>前者更像把“轻视”做成夸张而精细的评判动作；dismissal 只是把东西打发掉。</p><div class=\"tag-row\"><span class=\"tag\">ornate register</span><span class=\"tag\">plain rejection</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">floccinaucinihilipilification vs depreciation</h3><p>depreciation 常偏价值下降或会计语境；这个词更像主观地把东西判成不值钱。</p><div class=\"tag-row\"><span class=\"tag\">subjective belittling</span><span class=\"tag\">measured decrease</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Usage · 用法</span><h3 class=\"contrast-title\">used when length itself becomes rhetoric</h3><p>它适合压测 UI 的地方，恰恰也是它的语义之一：长度会参与语气。</p><div class=\"tag-row\"><span class=\"tag\">display pressure</span><span class=\"tag\">semantic excess</span></div></article>",
     "example_sentence": "Think of floccinaucinihilipilification as 'judge something as almost worthless' unfolding into two pressure-tested semantic branches.",
     "epiphany": "Some long words do not expand thought; they ceremonially crush value. 有些长词不是为了展开思想，而是为了郑重其事地把价值压低。",
-    "mermaid_code": "graph TD\n    A[mock-Latin pileup with four minimizers] --> B[judge something as almost worthless]\n    B --> C[layered rhetorical performance of dismissal]\n    B --> D[fine-grained judgment of negligible worth]\n    C --> E[它常被当作一种炫技性的长词使用，长度本身就参与表达：说话人不只是在否定，还在表演性地把对象往下压。]\n    D --> F[真正的核心不是长，而是“价值被一层层削薄”，直到对象几乎不值得投入注意力、资源或敬意。]"
+    "mermaid_code": "graph TD\n    A[mock-Latin pileup with four minimizers] --> B[judge something as almost worthless]\n    B --> C[layered rhetorical performance of dismissal]\n    B --> D[fine-grained judgment of negligible worth]\n    C --> E[它常被当作一种炫技性的长词使用，长度本身就参与表达：说话人不只是在否定，还在表演性地把对象往下压。]\n    D --> F[真正的核心不是长，而是“价值被一层层削薄”，直到对象几乎不值得投入注意力、资源或敬意。]",
+    "etymology_origin": "flocci + nauci + nihili + pili + -fication",
+    "etymology_origin_note": "这是一个把多个“几乎不值钱”的拉丁来源堆叠起来的炫学式长词，最后再接上名词后缀。",
+    "etymology_chunks": [
+      {
+        "form": "flocci",
+        "gloss": "of little value",
+        "explanation": "表示“像一团羊毛絮那样不值什么”，先把价值往下压。",
+        "role": "chunk"
+      },
+      {
+        "form": "nauci",
+        "gloss": "worth almost nothing",
+        "explanation": "继续补一层“几乎不值一顾”的感觉。",
+        "role": "chunk"
+      },
+      {
+        "form": "nihili",
+        "gloss": "of no worth",
+        "explanation": "把价值进一步压到接近零。",
+        "role": "chunk"
+      },
+      {
+        "form": "pili",
+        "gloss": "not worth a hair",
+        "explanation": "连“一根毛”都不值，完成夸张性的贬低。",
+        "role": "chunk"
+      },
+      {
+        "form": "-fication",
+        "gloss": "the act/process of making",
+        "explanation": "把前面的轻视动作收束成一个名词：一种“把价值判低”的过程。",
+        "role": "suffix"
+      }
+    ],
+    "etymology_development": [
+      {
+        "label": "Step 1",
+        "title": "semantic move",
+        "explanation": "前面四个词块都在重复同一件事：把对象的价值不断往下判。",
+        "kind": "meaning build-up"
+      },
+      {
+        "label": "Step 2",
+        "title": "rhetorical effect",
+        "explanation": "长而书卷气的外形让“轻视”不只是判断，还带上表演性和炫技感。",
+        "kind": "rhetorical effect"
+      },
+      {
+        "label": "Step 3",
+        "title": "modern takeaway",
+        "explanation": "所以这个词真正强调的是：用一种夸张、学究式的方式把某物判成几乎不值一提。",
+        "kind": "final sense"
+      }
+    ],
+    "etymology_cognates": [
+      {
+        "term": "nil",
+        "relation": "shared low-value idea",
+        "note": "现代英语里更直接的“零、无”价值感。"
+      },
+      {
+        "term": "-fication",
+        "relation": "shared nominalizer",
+        "note": "把动作或变化收成一个过程名词。"
+      },
+      {
+        "term": "trivialize",
+        "relation": "modern semantic cousin",
+        "note": "语义上更常见的“把某事看轻”。"
+      }
+    ]
   },
   {
     "word": "honorificabilitudinitatibus",
@@ -27,7 +163,78 @@
     "nuance_text": "<article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">honorificabilitudinitatibus vs honorable</h3><p>honorable 只是“值得尊敬”；这个词更像把“可授荣资格”写成法令。</p><div class=\"tag-row\"><span class=\"tag\">simple adjective</span><span class=\"tag\">institutionalized status</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">honorificabilitudinitatibus vs honorific</h3><p>honorific 更偏“表示尊敬的”；这里强调的是主体可被授予荣誉的状态。</p><div class=\"tag-row\"><span class=\"tag\">mark of respect</span><span class=\"tag\">capacity for honor</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Usage · 用法</span><h3 class=\"contrast-title\">used as a historical display word</h3><p>它常被引用时，引用者也在展示自己知道它。</p><div class=\"tag-row\"><span class=\"tag\">display knowledge</span><span class=\"tag\">learned theater</span></div></article>",
     "example_sentence": "Think of honorificabilitudinitatibus as 'state of being able to receive honors' unfolding into two pressure-tested semantic branches.",
     "epiphany": "Some words carry prestige not by meaning alone, but by how ceremonially they occupy space. 有些词的威严不只来自意义，也来自它们如何郑重地占据空间。",
-    "mermaid_code": "graph TD\n    A[Latin scholastic abstraction chain] --> B[state of being able to receive honors]\n    B --> C[ceremonial eligibility for public distinction]\n    B --> D[compressed medieval display of learned prestige]\n    C --> E[这个词让“值得被授荣”不再是单个判断，而像被包成一层正式制度语言，强调资格和可授予性。]\n    D --> F[它的长度和古典气质本身就在传递一种学术、戏剧、夸饰的身份表演感。]"
+    "mermaid_code": "graph TD\n    A[Latin scholastic abstraction chain] --> B[state of being able to receive honors]\n    B --> C[ceremonial eligibility for public distinction]\n    B --> D[compressed medieval display of learned prestige]\n    C --> E[这个词让“值得被授荣”不再是单个判断，而像被包成一层正式制度语言，强调资格和可授予性。]\n    D --> F[它的长度和古典气质本身就在传递一种学术、戏剧、夸饰的身份表演感。]",
+    "etymology_origin": "honor + -ific- + -abil- + -tudin- + -itatibus",
+    "etymology_origin_note": "它不是单个简单词根，而是一串把“荣誉资格”层层抽象化、名词化的拉丁化长构词。",
+    "etymology_chunks": [
+      {
+        "form": "honor",
+        "gloss": "honor",
+        "explanation": "核心从“荣誉、被承认”开始。",
+        "role": "root"
+      },
+      {
+        "form": "-ific-",
+        "gloss": "making / causing",
+        "explanation": "加入“使成某种状态”的力量。",
+        "role": "forming element"
+      },
+      {
+        "form": "-abil-",
+        "gloss": "able / capable of",
+        "explanation": "把它推进成“有资格被授予”的意思。",
+        "role": "capacity marker"
+      },
+      {
+        "form": "-tudin-",
+        "gloss": "state / condition",
+        "explanation": "把这种资格再抽象成一种状态。",
+        "role": "abstraction"
+      },
+      {
+        "form": "-itatibus",
+        "gloss": "formal pluralized nominal ending",
+        "explanation": "让整词带上中古学术拉丁式的制度化、书卷化外壳。",
+        "role": "ending"
+      }
+    ],
+    "etymology_development": [
+      {
+        "label": "Step 1",
+        "title": "from honor to honor-worthy capacity",
+        "explanation": "词义先从“荣誉”长成“可被授予荣誉的资格”。",
+        "kind": "meaning build-up"
+      },
+      {
+        "label": "Step 2",
+        "title": "from capacity to abstract status",
+        "explanation": "后缀层层叠加，把具体资格推进成抽象、正式、制度化的状态名词。",
+        "kind": "abstraction"
+      },
+      {
+        "label": "Step 3",
+        "title": "rhetorical effect",
+        "explanation": "因此它读起来不像日常词，而像一个故意摆出学识重量的历史长词。",
+        "kind": "rhetorical effect"
+      }
+    ],
+    "etymology_cognates": [
+      {
+        "term": "honor",
+        "relation": "shared root",
+        "note": "荣誉与认可的中心词。"
+      },
+      {
+        "term": "honorific",
+        "relation": "closer modern cousin",
+        "note": "更常见、更短的现代相关词。"
+      },
+      {
+        "term": "dignity",
+        "relation": "semantic neighbor",
+        "note": "更现代地表达“尊严、可受敬重”的框架。"
+      }
+    ]
   },
   {
     "word": "otorhinolaryngological",
@@ -37,7 +244,72 @@
     "nuance_text": "<article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">otorhinolaryngological vs auditory</h3><p>auditory 只偏听觉；这个词覆盖耳鼻喉联动系统。</p><div class=\"tag-row\"><span class=\"tag\">single channel</span><span class=\"tag\">specialty system</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">otorhinolaryngological vs nasal</h3><p>nasal 只锁定鼻部；这里强调的是专科整合。</p><div class=\"tag-row\"><span class=\"tag\">single organ</span><span class=\"tag\">combined domain</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Usage · 用法</span><h3 class=\"contrast-title\">used in specialist summaries</h3><p>往往用于门诊记录、手术说明或专科研究摘要。</p><div class=\"tag-row\"><span class=\"tag\">specialist note</span><span class=\"tag\">stacked anatomy</span></div></article>",
     "example_sentence": "Think of otorhinolaryngological as 'describe the integrated ear-nose-throat field' unfolding into two pressure-tested semantic branches.",
     "epiphany": "A specialty word can feel long because the body regions were never meant to stay separate here. 专科词之所以显得长，常常是因为这些身体区域在这里本来就不该被拆开。",
-    "mermaid_code": "graph TD\n    A[oto + rhino + laryngo + logical] --> B[describe the integrated ear-nose-throat field]\n    B --> C[multi-organ specialty viewed as one practice]\n    B --> D[technical specialist adjective with stacked anatomy]\n    C --> E[它提醒读者别把器官孤立切开看，因为这个领域的诊断与手术路径本来就是相互牵动的。]\n    D --> F[词形像把三块解剖学地图卷在一起，天然要求更稳的断行与更宽容的节点布局。]"
+    "mermaid_code": "graph TD\n    A[oto + rhino + laryngo + logical] --> B[describe the integrated ear-nose-throat field]\n    B --> C[multi-organ specialty viewed as one practice]\n    B --> D[technical specialist adjective with stacked anatomy]\n    C --> E[它提醒读者别把器官孤立切开看，因为这个领域的诊断与手术路径本来就是相互牵动的。]\n    D --> F[词形像把三块解剖学地图卷在一起，天然要求更稳的断行与更宽容的节点布局。]",
+    "etymology_origin": "oto + rhino + laryngo + logical",
+    "etymology_origin_note": "这个词本质上是把耳、鼻、喉三块解剖区域直接并列，再压成一个专科形容词。",
+    "etymology_chunks": [
+      {
+        "form": "oto",
+        "gloss": "ear",
+        "explanation": "先把耳部系统放进专科视野。",
+        "role": "root"
+      },
+      {
+        "form": "rhino",
+        "gloss": "nose",
+        "explanation": "再把鼻部系统并进来。",
+        "role": "root"
+      },
+      {
+        "form": "laryngo",
+        "gloss": "larynx / throat",
+        "explanation": "最后把喉与发声/气道区域接上。",
+        "role": "root"
+      },
+      {
+        "form": "logical",
+        "gloss": "relating to a field of study",
+        "explanation": "把前面的解剖并列收成一个学科性形容词。",
+        "role": "suffix"
+      }
+    ],
+    "etymology_development": [
+      {
+        "label": "Step 1",
+        "title": "anatomical stacking",
+        "explanation": "词块不是递进抽象，而是先把三个身体区域直接摞在一起。",
+        "kind": "meaning build-up"
+      },
+      {
+        "label": "Step 2",
+        "title": "specialty formation",
+        "explanation": "再由形容词结尾把它们收束成一个联合专科。",
+        "kind": "field formation"
+      },
+      {
+        "label": "Step 3",
+        "title": "reader effect",
+        "explanation": "所以它的长度感来自“解剖区域堆叠”，而不是复杂哲学抽象。",
+        "kind": "reading cue"
+      }
+    ],
+    "etymology_cognates": [
+      {
+        "term": "otology",
+        "relation": "ear-specific branch",
+        "note": "只看耳部。"
+      },
+      {
+        "term": "rhinology",
+        "relation": "nose-specific branch",
+        "note": "只看鼻部。"
+      },
+      {
+        "term": "laryngology",
+        "relation": "throat-specific branch",
+        "note": "只看喉部。"
+      }
+    ]
   },
   {
     "word": "psychoneuroendocrinological",
@@ -47,7 +319,72 @@
     "nuance_text": "<article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">psychoneuroendocrinological vs neurological</h3><p>neurological 只看神经；这个词要求你把心理和激素系统一并打开。</p><div class=\"tag-row\"><span class=\"tag\">single system</span><span class=\"tag\">triple system</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">psychoneuroendocrinological vs psychosomatic</h3><p>psychosomatic 更偏身心互动；这里更像实证地追踪神经和激素网络。</p><div class=\"tag-row\"><span class=\"tag\">broad mind-body</span><span class=\"tag\">tracked system linkage</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Usage · 用法</span><h3 class=\"contrast-title\">used in integrative research framing</h3><p>常见于要同时解释压力、炎症、睡眠和情绪的研究写法。</p><div class=\"tag-row\"><span class=\"tag\">integrative frame</span><span class=\"tag\">stacked causality</span></div></article>",
     "example_sentence": "Think of psychoneuroendocrinological as 'describe a linked mind-nerve-hormone system' unfolding into two pressure-tested semantic branches.",
     "epiphany": "Sometimes a long word is a demand: stop isolating systems that keep acting together. 有时长词本身就是一道命令：别再把总在一起起作用的系统拆开看。",
-    "mermaid_code": "graph TD\n    A[psycho + neuro + endocrine + logical] --> B[describe a linked mind-nerve-hormone system]\n    B --> C[cross-system scientific integration under one lens]\n    B --> D[high-density research register with stacked domains]\n    C --> E[它提示读者别把情绪、神经活动和激素变化拆开看，而要用一张联动图去理解症状、压力与调节。]\n    D --> F[阅读时的压迫感来自学科堆叠：每多一层前缀，句子都更像论文摘要而不是一般说明。]"
+    "mermaid_code": "graph TD\n    A[psycho + neuro + endocrine + logical] --> B[describe a linked mind-nerve-hormone system]\n    B --> C[cross-system scientific integration under one lens]\n    B --> D[high-density research register with stacked domains]\n    C --> E[它提示读者别把情绪、神经活动和激素变化拆开看，而要用一张联动图去理解症状、压力与调节。]\n    D --> F[阅读时的压迫感来自学科堆叠：每多一层前缀，句子都更像论文摘要而不是一般说明。]",
+    "etymology_origin": "psycho + neuro + endocrino + logical",
+    "etymology_origin_note": "这个词不是在拆一个系统，而是在把心理、神经、内分泌三套系统强行并到一个研究镜头下。",
+    "etymology_chunks": [
+      {
+        "form": "psycho",
+        "gloss": "mind / psyche",
+        "explanation": "先把主观体验、情绪与心理压力拉进来。",
+        "role": "root"
+      },
+      {
+        "form": "neuro",
+        "gloss": "nerves / neural system",
+        "explanation": "再把神经传导与回路系统接上。",
+        "role": "root"
+      },
+      {
+        "form": "endocrino",
+        "gloss": "hormonal / endocrine",
+        "explanation": "再加入激素和内分泌调节。",
+        "role": "root"
+      },
+      {
+        "form": "logical",
+        "gloss": "relating to a field/study",
+        "explanation": "把前三层并列系统收成一个研究性形容词。",
+        "role": "suffix"
+      }
+    ],
+    "etymology_development": [
+      {
+        "label": "Step 1",
+        "title": "system stacking",
+        "explanation": "这个词先把三个不同学科系统直接并列，而不是一个词块一个词块地细抠动作。",
+        "kind": "meaning build-up"
+      },
+      {
+        "label": "Step 2",
+        "title": "integrative frame",
+        "explanation": "并列之后，它要求读者把这些系统当成联动网络来看。",
+        "kind": "scientific frame"
+      },
+      {
+        "label": "Step 3",
+        "title": "rhetorical effect",
+        "explanation": "因此它的厚重感来自跨学科堆叠，而不是单纯“词太长”。",
+        "kind": "reading cue"
+      }
+    ],
+    "etymology_cognates": [
+      {
+        "term": "psyche",
+        "relation": "shared mind root",
+        "note": "心智与主观体验。"
+      },
+      {
+        "term": "neuron",
+        "relation": "shared nerve root",
+        "note": "神经传导系统。"
+      },
+      {
+        "term": "endocrine",
+        "relation": "shared hormone root",
+        "note": "激素与内分泌调节。"
+      }
+    ]
   },
   {
     "word": "thyroparathyroidectomized",
@@ -57,6 +394,71 @@
     "nuance_text": "<article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">thyroparathyroidectomized vs postoperative</h3><p>postoperative 只说“术后”；这个词精确说出了哪类切除造成了术后状态。</p><div class=\"tag-row\"><span class=\"tag\">generic after surgery</span><span class=\"tag\">specific removal state</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">thyroparathyroidectomized vs thyroidectomized</h3><p>后者只涉及甲状腺；前者把甲旁腺也一起纳入，风险图谱更重。</p><div class=\"tag-row\"><span class=\"tag\">single gland</span><span class=\"tag\">combined gland removal</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Usage · 用法</span><h3 class=\"contrast-title\">used in dense clinical reporting</h3><p>适合病历、研究动物模型或术后生理讨论，语气高度压缩。</p><div class=\"tag-row\"><span class=\"tag\">clinical compression</span><span class=\"tag\">state after intervention</span></div></article>",
     "example_sentence": "Think of thyroparathyroidectomized as 'be left in a post-removal gland state' unfolding into two pressure-tested semantic branches.",
     "epiphany": "Clinical long words often hide a whole operation inside what looks like a simple adjective. 临床长词常常把整场手术藏进一个看似普通的形容词里。",
-    "mermaid_code": "graph TD\n    A[thyro + para-thyroid + ectomy + -ized] --> B[be left in a post-removal gland state]\n    B --> C[surgically altered endocrine status after removal]\n    B --> D[clinical shorthand compressing procedure into state]\n    C --> E[重点不是器官名称本身，而是主体已被手术改写：身体的调节条件、风险与后续管理都因此改变。]\n    D --> F[整个词像把手术记录压成了结果标签，让医生在一个词里同时看到过程与后果。]"
+    "mermaid_code": "graph TD\n    A[thyro + para-thyroid + ectomy + -ized] --> B[be left in a post-removal gland state]\n    B --> C[surgically altered endocrine status after removal]\n    B --> D[clinical shorthand compressing procedure into state]\n    C --> E[重点不是器官名称本身，而是主体已被手术改写：身体的调节条件、风险与后续管理都因此改变。]\n    D --> F[整个词像把手术记录压成了结果标签，让医生在一个词里同时看到过程与后果。]",
+    "etymology_origin": "thyro + para-thyroid + ectomy + -ized",
+    "etymology_origin_note": "这个词的重点不是抽象义，而是把“涉及哪些腺体 + 做了什么手术 + 术后留下什么状态”压成一个标签。",
+    "etymology_chunks": [
+      {
+        "form": "thyro",
+        "gloss": "thyroid",
+        "explanation": "先点出甲状腺。",
+        "role": "root"
+      },
+      {
+        "form": "para-thyroid",
+        "gloss": "parathyroid",
+        "explanation": "再把甲旁腺并进来，说明不是单一腺体问题。",
+        "role": "root"
+      },
+      {
+        "form": "ectomy",
+        "gloss": "surgical removal",
+        "explanation": "明确这里发生的是切除，而不是一般观察。",
+        "role": "procedure"
+      },
+      {
+        "form": "-ized",
+        "gloss": "left in a resulting state",
+        "explanation": "把整个词落成“术后已经被改写的状态”。",
+        "role": "result state"
+      }
+    ],
+    "etymology_development": [
+      {
+        "label": "Step 1",
+        "title": "organs identified",
+        "explanation": "先明确牵涉的是哪两类腺体。",
+        "kind": "meaning build-up"
+      },
+      {
+        "label": "Step 2",
+        "title": "procedure compressed",
+        "explanation": "再把切除动作塞进词中，让词面自带病历压缩感。",
+        "kind": "clinical compression"
+      },
+      {
+        "label": "Step 3",
+        "title": "state after intervention",
+        "explanation": "最后重点落在“主体现在处于怎样的术后状态”。",
+        "kind": "final sense"
+      }
+    ],
+    "etymology_cognates": [
+      {
+        "term": "thyroidectomy",
+        "relation": "related procedure term",
+        "note": "只涉及甲状腺切除。"
+      },
+      {
+        "term": "parathyroid",
+        "relation": "shared organ term",
+        "note": "甲旁腺相关。"
+      },
+      {
+        "term": "ectomy",
+        "relation": "shared procedure marker",
+        "note": "切除类医学词共同后缀。"
+      }
+    ]
   }
 ]
