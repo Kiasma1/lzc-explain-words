@@ -2,7 +2,9 @@
 
 [English README](README.md)
 
-这是一个用于英文单词深度掌握的 Codex skill，会生成具有 museum 风格的中英双语 HTML 词卡，内容包括：
+> 不要又一篇词典释义。把一个词做成**能收藏、能离线打开**的博物馆级中英双语词卡。
+
+这是一个用于英文单词深度掌握的 **Agent Skill**（兼容 Claude Code / Codex / Grok 等），会生成 museum 风格的中英双语 HTML 词卡，内容包括：
 
 - 核心语义骨架
 - 词源与同族词
@@ -18,17 +20,29 @@
 - Mermaid 运行时已经内置到仓库 `assets/vendor/mermaid.min.js`，不再依赖 CDN。
 - 每次渲染都会自动把 Mermaid 运行时复制到输出目录，离线打开也能正常显示。
 - 仓库内已经包含极限压力测试输入、HTML 输出、桌面截图、移动端截图与摘要结果。
+- 另附日常词样例 `examples/showcase/`（Serendipity），不只靠极限长词证明版式。
 
 ## 仓库结构
 
-- `SKILL.md` —— skill 使用说明
+- `SKILL.md` —— 使用契约（触发词、失败模式、黑名单）
 - `assets/word_card.html` —— museum 风格 HTML 模板
 - `assets/vendor/mermaid.min.js` —— 本地 Mermaid 运行时
 - `scripts/render_word_cards.py` —— 单词/多词渲染脚本
 - `scripts/run_extreme_stress_test.py` —— 可复现的渲染 + 截图压测脚本
-- `examples/extreme-stress/input.json` —— 6 个极端长词输入集
-- `examples/extreme-stress/results/` —— 最新 HTML、截图和 summary JSON
+- `examples/showcase/` —— 日常词样例
+- `examples/extreme-stress/` —— 6 个极端长词 + 结果
 - `docs/extreme-stress-results.zh-CN.md` —— 压测结果说明
+- `test-prompts.json` —— 标准触发话术
+
+## 安装
+
+```bash
+git clone https://github.com/Kiasma1/lzc-explain-words.git
+# Claude Code 示例
+ln -s "$PWD/lzc-explain-words" ~/.claude/skills/lzc-explain-words
+```
+
+触发例句：`深度解释这个词 Serendipity` / `生成词卡 incubate`。
 
 ## 快速开始
 
@@ -36,11 +50,17 @@
 
 ```bash
 python3 scripts/render_word_cards.py \
-  --input /path/to/words.json \
-  --output-dir /path/to/output
+  --input examples/showcase/input.json \
+  --output-dir /tmp/lzc-showcase
 ```
 
 渲染器除了写出 HTML，也会把 `mermaid.min.js` 一并复制到输出目录，因此本地查看时不需要联网。
+
+## 安全边界
+
+- 渲染不依赖外网（Mermaid 本地 vendored）。
+- 不在词卡中写入 API key 或私人路径。
+- 词源内容由模型生成：不确定须标注；Skill 禁止编造「看起来很权威」的假词源。
 
 ## 极限压力测试
 

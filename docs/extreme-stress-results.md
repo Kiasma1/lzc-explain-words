@@ -1,6 +1,6 @@
 # Extreme Stress Test Results
 
-This repository now ships an offline Mermaid runtime and a reproducible screenshot pipeline.
+This repository ships an offline Mermaid runtime and a reproducible screenshot pipeline.
 The latest extreme stress run was generated from `examples/extreme-stress/input.json` with:
 
 ```bash
@@ -16,14 +16,18 @@ python3 scripts/run_extreme_stress_test.py
 
 ## Latest run summary
 
+Sizes below match `examples/extreme-stress/results/summary.json` (source of truth).
+
 | Word | Desktop | Mobile |
 | --- | --- | --- |
-| `deinstitutionalization` | `1440×3101` | `1170×10164` |
-| `floccinaucinihilipilification` | `1440×3101` | `1170×10431` |
-| `honorificabilitudinitatibus` | `1440×3101` | `1170×10287` |
-| `otorhinolaryngological` | `1440×3003` | `1170×9996` |
-| `psychoneuroendocrinological` | `1440×3068` | `1170×10623` |
-| `thyroparathyroidectomized` | `1440×3068` | `1170×10491` |
+| `deinstitutionalization` | `1440×3792` | `1170×13251` |
+| `floccinaucinihilipilification` | `1440×4110` | `1170×14307` |
+| `honorificabilitudinitatibus` | `1440×4073` | `1170×14013` |
+| `otorhinolaryngological` | `1440×3617` | `1170×13086` |
+| `psychoneuroendocrinological` | `1440×3683` | `1170×13944` |
+| `thyroparathyroidectomized` | `1440×3683` | `1170×13740` |
+
+Desktop channel in summary: `chrome`. Mobile device: `iPhone 14`.
 
 ## Example screenshots
 

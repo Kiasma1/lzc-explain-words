@@ -2,7 +2,9 @@
 
 [中文说明 / Chinese README](README.zh-CN.md)
 
-A Codex skill for deep English word mastery. It renders premium bilingual HTML word cards with:
+> Don't ask chat for another dictionary gloss. Get a **museum-grade bilingual word card** you can open offline.
+
+An Agent Skill for deep English word mastery. It renders premium bilingual HTML word cards with:
 
 - core semantic framing
 - etymology and cognates
@@ -11,6 +13,8 @@ A Codex skill for deep English word mastery. It renders premium bilingual HTML w
 - bilingual epiphany lines
 - reproducible extreme stress-test artifacts
 
+Works with Claude Code, Codex, Grok, and other Agent Skills–compatible runtimes (not Codex-only).
+
 ## Highlights
 
 - Supports one word or multiple words from a single JSON input.
@@ -18,17 +22,32 @@ A Codex skill for deep English word mastery. It renders premium bilingual HTML w
 - Ships Mermaid locally via `assets/vendor/mermaid.min.js` instead of a CDN.
 - Copies the Mermaid runtime into each render output directory automatically.
 - Includes an extreme stress-test suite with desktop and iPhone-class screenshots.
+- Ships a normal-word showcase (`examples/showcase/`) besides extreme long words.
 
 ## Repository Layout
 
-- `SKILL.md` — skill instructions and usage contract
+- `SKILL.md` — skill instructions and usage contract (triggers, failure modes, blacklist)
 - `assets/word_card.html` — museum-style HTML template
 - `assets/vendor/mermaid.min.js` — vendored Mermaid runtime
 - `scripts/render_word_cards.py` — renderer for one or many entries
 - `scripts/run_extreme_stress_test.py` — reproducible render + screenshot verification
+- `examples/showcase/` — everyday word sample (`Serendipity`)
 - `examples/extreme-stress/input.json` — six hard-case entries
 - `examples/extreme-stress/results/` — latest HTML, screenshots, and summary JSON
 - `docs/extreme-stress-results.md` — human-readable stress-test summary
+- `test-prompts.json` — standard agent trigger prompts
+
+## Install (Agent Skills)
+
+```bash
+git clone https://github.com/Kiasma1/lzc-explain-words.git
+# Claude Code
+ln -s "$PWD/lzc-explain-words" ~/.claude/skills/lzc-explain-words
+# Grok
+# link or copy to ~/.grok/skills/lzc-explain-words
+```
+
+Then say: *Deeply explain the word Serendipity* / *生成词卡 incubate*.
 
 ## Quick Start
 
@@ -36,11 +55,17 @@ Render from structured JSON:
 
 ```bash
 python3 scripts/render_word_cards.py \
-  --input /path/to/words.json \
-  --output-dir /path/to/output
+  --input examples/showcase/input.json \
+  --output-dir /tmp/lzc-showcase
 ```
 
 The renderer writes HTML files and also copies `mermaid.min.js` into the same output directory, so the cards stay self-contained for local viewing.
+
+## Safety boundary
+
+- Does not require network for rendering (Mermaid is vendored).
+- Does not embed API keys or private paths in cards.
+- Content etymology is model-generated: treat uncertain roots as provisional; the skill forbids inventing authoritative-looking fake etymology.
 
 ## Stress-Test Pipeline
 

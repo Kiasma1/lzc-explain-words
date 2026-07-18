@@ -16,14 +16,18 @@ python3 scripts/run_extreme_stress_test.py
 
 ## 最新结果摘要
 
+尺寸以 `examples/extreme-stress/results/summary.json` 为准（与文档不一致时以 JSON 为真源）。
+
 | 单词 | 桌面截图 | 移动截图 |
 | --- | --- | --- |
-| `deinstitutionalization` | `1440×3101` | `1170×10164` |
-| `floccinaucinihilipilification` | `1440×3101` | `1170×10431` |
-| `honorificabilitudinitatibus` | `1440×3101` | `1170×10287` |
-| `otorhinolaryngological` | `1440×3003` | `1170×9996` |
-| `psychoneuroendocrinological` | `1440×3068` | `1170×10623` |
-| `thyroparathyroidectomized` | `1440×3068` | `1170×10491` |
+| `deinstitutionalization` | `1440×3792` | `1170×13251` |
+| `floccinaucinihilipilification` | `1440×4110` | `1170×14307` |
+| `honorificabilitudinitatibus` | `1440×4073` | `1170×14013` |
+| `otorhinolaryngological` | `1440×3617` | `1170×13086` |
+| `psychoneuroendocrinological` | `1440×3683` | `1170×13944` |
+| `thyroparathyroidectomized` | `1440×3683` | `1170×13740` |
+
+桌面 channel：`chrome`；移动设备：`iPhone 14`。
 
 ## 示例截图
 

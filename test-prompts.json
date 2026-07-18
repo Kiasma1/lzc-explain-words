@@ -1,0 +1,31 @@
+{
+  "skill": "lzc-explain-words",
+  "prompts": [
+    {
+      "id": "single-word",
+      "prompt": "Deeply explain the word Serendipity and generate an HTML word card.",
+      "expect": [
+        "Writes structured JSON with required fields",
+        "Runs scripts/render_word_cards.py",
+        "Returns word_card_serendipity.html path and bilingual epiphany"
+      ]
+    },
+    {
+      "id": "multi-word",
+      "prompt": "用 lzc-explain-words 解释 excerpt、lucid，生成词卡",
+      "expect": [
+        "Two HTML cards in input order",
+        "word_cards_index.html exists",
+        "No dropped words without stating failure"
+      ]
+    },
+    {
+      "id": "showcase-render-only",
+      "prompt": "不要重新写内容，只渲染 examples/showcase/input.json",
+      "expect": [
+        "python scripts/render_word_cards.py --input examples/showcase/input.json --output-dir <tmp>",
+        "HTML opens offline with local mermaid.min.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+[
+  {
+    "word": "Serendipity",
+    "phonetic": "ˌser.ənˈdɪp.ə.ti",
+    "definition_deep": "<p><b>原始画面</b>：在锡兰（Serendip）冒险的王子们，本想找一件东西，却不断撞上另一件更珍贵的发现。<br><br><b>核心意象</b>：意图中的寻找 × 计划外的赠礼 = 幸运的偏航。<br><br><b>解释</b>：serendipity 不是「好运砸头」，而是<strong>你在认真走一条路时，眼睛仍张开</strong>，于是旁边的惊喜有资格被接住。</p>",
+    "etymology": "<p><b>Origin:</b> Serendip (old name for Sri Lanka) + -ity，经 Horace Walpole 1754 年书信凝固成现代英语词。</p>",
+    "etymology_origin": "Serendip + -ity",
+    "etymology_origin_note": "来自童话地名，经文人书信进入英语，后泛化为「意外收获」的抽象名词。",
+    "etymology_chunks": [
+      {
+        "form": "Serendip",
+        "gloss": "old name of Sri Lanka / tale-land",
+        "explanation": "故事舞台：王子们的意外发现发生在此地名之下。",
+        "role": "root"
+      },
+      {
+        "form": "-ity",
+        "gloss": "state / quality",
+        "explanation": "把一次叙事气质收成可复用的抽象性质。",
+        "role": "noun suffix"
+      }
+    ],
+    "etymology_development": [
+      {
+        "label": "Step 1",
+        "title": "place-name in a tale",
+        "explanation": "先有地名与故事，不是实验室术语。",
+        "kind": "source"
+      },
+      {
+        "label": "Step 2",
+        "title": "Walpole coinage",
+        "explanation": "书信里把「意外发现有价值之物」钉成词。",
+        "kind": "coinage"
+      },
+      {
+        "label": "Step 3",
+        "title": "modern abstract noun",
+        "explanation": "进入日常英语，强调敏锐 + 偶然的合力。",
+        "kind": "final sense"
+      }
+    ],
+    "etymology_cognates": [
+      {
+        "term": "serendipitous",
+        "relation": "adjective",
+        "note": "形容词：带意外之喜的。"
+      },
+      {
+        "term": "happenstance",
+        "relation": "neighbor",
+        "note": "更中性的「碰巧」，不一定含「有价值」。"
+      }
+    ],
+    "nuance_text": "<article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">serendipity vs luck</h3><p>luck 可纯随机；serendipity 暗示你已在路上、并 equip 了看见的能力。</p><div class=\"tag-row\"><span class=\"tag\">passive fortune</span><span class=\"tag\">prepared noticing</span></div></article><article class=\"contrast-item\"><span class=\"compare-label\">Compare · 对比</span><h3 class=\"contrast-title\">serendipity vs coincidence</h3><p>coincidence 只说同时发生；serendipity 额外带「可喜的收获」评价。</p><div class=\"tag-row\"><span class=\"tag\">neutral co-occurrence</span><span class=\"tag\">valued surprise</span></div></article>",
+    "example_sentence": "The best product insights often arrive as serendipity: you were solving one pain, and the adjacent one waved first.",
+    "epiphany": "Serendipity is luck that meets a prepared eye. 意外之喜，是幸运撞上了一双已在路上的眼睛。",
+    "mermaid_code": "graph TD\n    A[Serendip tale / place-name] --> B[searching with open attention]\n    B --> C[unplanned but valued find]\n    C --> D[modern: prepared noticing + chance]"
+  }
+]
