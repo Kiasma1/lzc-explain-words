@@ -1,232 +1,241 @@
+<sub>🌐 <a href="README.md">English</a> · <b>中文</b></sub>
+
+<div align="center">
+
 # lzc-explain-words
 
-[English README](README.md)
+> *「词典告诉你一个词是什么意思；这个 Skill 让你看见，它的意义是怎么长出来的。」*
 
-> 不要又一篇词典释义。把一个词做成**能收藏、能离线打开**的博物馆级中英双语词卡。
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-6f42c1)](SKILL.md)
+[![Offline HTML](https://img.shields.io/badge/output-offline%20HTML-1f6feb)](#你会得到什么)
+[![Multi-runtime](https://img.shields.io/badge/runtime-Claude%20Code%20%7C%20Codex%20%7C%20more-2ea44f)](#运行要求)
+[![License: GPL-2.0-only](https://img.shields.io/badge/license-GPL--2.0--only-blue)](LICENSE)
 
-这是一个用于英文单词深度掌握的 **Agent Skill**（兼容 Claude Code / Codex / Grok 等），会生成 museum 风格的中英双语 HTML 词卡，内容包括：
+**输入一个英文词，或者一整组词；得到可收藏的双语 HTML 词卡，里面有词源、语感、语义拓扑和一句真正记得住的话。**
 
-- 核心语义骨架
-- 词源与同族词
-- 语感对比
-- Mermaid 语义拓扑图
-- 中英双语 epiphany 金句
-- 可复现的极限压力测试产物
+[先看效果](#看看真实效果) · [立即安装](#快速开始) · [复制触发词](#怎么触发) · [复现验证](#复现与验证) · [安全边界](#默认离线)
 
-## 亮点
+</div>
 
-- 支持单词或多词输入。
-- 对超长标题、超长音标做了自动换行保护，避免横向溢出。
-- Mermaid 运行时已经内置到仓库 `assets/vendor/mermaid.min.js`，不再依赖 CDN。
-- 每次渲染都会自动把 Mermaid 运行时复制到输出目录，离线打开也能正常显示。
-- 仓库内已经包含极限压力测试输入、HTML 输出、桌面截图、移动端截图与摘要结果。
-- 另附日常词样例 `examples/showcase/`（Serendipity），不只靠极限长词证明版式。
+---
 
-## 仓库结构
+![Serendipity 词卡演示](examples/showcase/showcase.gif)
 
-- `SKILL.md` —— 使用契约（触发词、失败模式、黑名单）
-- `assets/word_card.html` —— museum 风格 HTML 模板
-- `assets/vendor/mermaid.min.js` —— 本地 Mermaid 运行时
-- `scripts/render_word_cards.py` —— 单词/多词渲染脚本
-- `scripts/run_extreme_stress_test.py` —— 可复现的渲染 + 截图压测脚本
-- `examples/showcase/` —— 日常词样例
-- `examples/extreme-stress/` —— 6 个极端长词 + 结果
-- `docs/extreme-stress-results.zh-CN.md` —— 压测结果说明
-- `test-prompts.json` —— 标准触发话术
+<sub>真实回放来自 [`examples/showcase/input.json`](examples/showcase/input.json)，由 [`scripts/record_showcase.py`](scripts/record_showcase.py) 录制。</sub>
 
-## 安装
+---
 
-```bash
-git clone https://github.com/Kiasma1/lzc-explain-words.git
-# Claude Code 示例
-ln -s "$PWD/lzc-explain-words" ~/.claude/skills/lzc-explain-words
+## 它解决什么问题
+
+查到 *serendipity* 的中文意思只要几秒。难的是过几天以后，你还记不记得它为什么有这种语感。
+
+普通释义常常漏掉真正帮助记忆的东西：这个词最初的画面、构词部分如何配合、它和近义词到底差在哪儿，以及哪一句话能把整层意义钉进脑海。`lzc-explain-words` 把这些内容组织成一件可以保存、重开和比较的视觉作品。
+
+它首先是 Agent Skill，其次才是渲染器：Agent 负责完成语言解构，仓库里的脚本负责把结果变成离线词卡，而不是让答案继续埋在聊天记录里。
+
+---
+
+## 你会得到什么
+
+| 层次 | 词卡会呈现什么 |
+| --- | --- |
+| 核心语义骨架 | 释义背后的原始画面与概念公式 |
+| 词源地图 | 把真实词块、整体义演化和同族词分开呈现 |
+| 语感对比 | 解释这个词与邻近词为什么“感觉不一样” |
+| 语义拓扑 | 用 Mermaid 串起来源、核心动作与现代用法 |
+| 双语 Epiphany | 用一句中英金句收住整个词的灵魂 |
+| 离线产物 | 不依赖 Mermaid CDN、可本地收藏的 HTML 词卡 |
+
+一个词生成一张卡；多个词生成多张卡，并额外生成本地索引页。
+
+---
+
+## 看看真实效果
+
+只需对 Agent 说一句自然语言：
+
+```text
+深度解释 Serendipity，并生成一张 HTML 词卡。
 ```
 
-触发例句：`深度解释这个词 Serendipity` / `生成词卡 incubate`。
+Skill 会整理结构化内容，渲染 `word_card_serendipity.html`，把本地 Mermaid 运行时复制到旁边，最后返回词卡路径与双语 Epiphany。
+
+上面的 GIF 使用仓库内真实输入生成，不是手工摆拍。任何时候都可以重新录制：
+
+```bash
+python scripts/record_showcase.py
+```
+
+---
 
 ## 快速开始
 
-从结构化 JSON 渲染词卡：
+一行安装：
 
 ```bash
-python3 scripts/render_word_cards.py \
-  --input examples/showcase/input.json \
-  --output-dir /tmp/lzc-showcase
+npx skills add Kiasma1/lzc-explain-words
 ```
 
-渲染器除了写出 HTML，也会把 `mermaid.min.js` 一并复制到输出目录，因此本地查看时不需要联网。
+装完后直接对 Agent 说：
 
-## 安全边界
+```text
+讲透 incubate 这个词，并生成词卡。
+```
 
-- 渲染不依赖外网（Mermaid 本地 vendored）。
-- 不在词卡中写入 API key 或私人路径。
-- 词源内容由模型生成：不确定须标注；Skill 禁止编造「看起来很权威」的假词源。
+这条安装命令已经对公网 GitHub 仓库做过真实回放；安装器会识别支持的 Agent 环境，并安装仓库根目录的 [`SKILL.md`](SKILL.md)。
 
-## 极限压力测试
+### 手动安装
 
-先安装移动端验证所需的 Playwright WebKit 浏览器：
+如果你想先检查仓库，或者自行建立链接：
+
+```bash
+git clone --depth 1 https://github.com/Kiasma1/lzc-explain-words.git
+```
+
+把克隆目录复制或链接到运行时的 skills 目录即可。`--depth 1` 会避开 Git 历史中遗留的旧截图；只有需要完整贡献历史时才去掉它。
+
+---
+
+## 怎么触发
+
+安装后可以直接这样说：
+
+- `深度解释这个词：Serendipity。`
+- `生成词卡 incubate。`
+- `把 excerpt、lucid、serendipity 做成 HTML 词卡。`
+- `讲透 resilience 这个单词。`
+- `用语感对比讲清 ingenious 和 ingenuous。`
+- `词源解构 floccinaucinihilipilification，并生成词卡。`
+
+纯翻译、刷词表、只查音标，以及明确不需要 HTML 产物的随口解释，不属于这个 Skill 的触发范围。
+
+---
+
+## 直接渲染结构化数据
+
+Agent 工作流会先写出结构化 JSON，再调用渲染器。你也可以直接使用渲染器：
+
+```bash
+python scripts/render_word_cards.py \
+  --input examples/showcase/input.json \
+  --output-dir ./word-cards
+```
+
+如果系统只提供 `python3` 命令，请把上面的 `python` 替换为 `python3`。
+
+基础必填字段：
+
+```text
+word · phonetic · definition_deep · etymology · nuance_text
+example_sentence · epiphany · mermaid_code
+```
+
+这些可选字段会把真实词块和后来的整体义演化分开：
+
+| 字段 | 用途 |
+| --- | --- |
+| `etymology_origin` | 简洁的来源或构词公式 |
+| `etymology_origin_note` | 对整体来源路径的说明 |
+| `etymology_chunks` | 真实词块或语素卡片 |
+| `etymology_development` | 展示整体意义如何逐步形成 |
+| `etymology_cognates` | 同族词及其关系 |
+
+原始 `etymology` HTML 仍然兼容旧数据。完整真实输入见 [`examples/showcase/input.json`](examples/showcase/input.json)。
+
+---
+
+## 它和普通解释有什么不同
+
+| 维度 | 常见聊天解释 | `lzc-explain-words` |
+| --- | --- | --- |
+| 最终形态 | 一段容易被冲走的消息 | 可反复打开的离线 HTML 作品 |
+| 词源 | 常是一整段文字 | 词块、意义演化和同族词分层呈现 |
+| 语感 | 罗列近义词 | 聚焦邻近词在真实使用中的感觉差异 |
+| 语义模型 | 只有文字 | 解释旁边带可视化 Mermaid 拓扑 |
+| 多词处理 | 容易漏词或打乱顺序 | 按顺序生成词卡和索引；失败必须明说 |
+| 验证方式 | 依赖当次 Agent 发挥 | 有测试 prompt、单测、演示录制器和压力管线 |
+
+---
+
+## 默认离线
+
+- 渲染不需要 API key，也不会发起网络请求。
+- Mermaid 正本位于 [`assets/vendor/mermaid.min.js`](assets/vendor/mermaid.min.js)，每次输出都会复制一份到词卡旁边。
+- Skill 不得把 API key、私人路径或真实账号写进词卡。
+- 词源不确定时必须明确标注，不得编造看起来权威的拉丁或希腊词根。
+- 缺少必填字段时会明确失败，不会静默生成一张“看起来没问题”的残缺词卡。
+- 截图工具不可用时仍然交付 HTML，并说明跳过了视觉检查。
+
+语言内容由当前 Agent 生成；在高准确性场景中，请进一步核验词源断言。
+
+---
+
+## 复现与验证
+
+运行轻量回归测试：
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+用桌面 Chromium 和 iPhone 14 WebKit 预设运行 6 词极限版式压测：
 
 ```bash
 npm exec --yes --package=playwright -- playwright install webkit
+python scripts/run_extreme_stress_test.py
 ```
 
-然后运行仓库内置的极限压测：
+最近一次本地真实回放生成了 6 张 HTML 词卡、6 张 1440 像素桌面截图、6 张 1170 像素移动截图；6 张卡全部引用本地 Mermaid，远程脚本引用为 0。机器可读摘要写入 `examples/extreme-stress/results/summary.json`。
 
-```bash
-python3 scripts/run_extreme_stress_test.py
+生成的 HTML、截图和摘要由 Git 忽略，以保持当前检出的 Skill 轻量。仓库保留输入与验证约定：
+
+- [`examples/extreme-stress/input.json`](examples/extreme-stress/input.json)
+- [`docs/extreme-stress-results.zh-CN.md`](docs/extreme-stress-results.zh-CN.md)
+- [`tests/test_run_extreme_stress_test.py`](tests/test_run_extreme_stress_test.py)
+
+运行 `python scripts/record_showcase.py` 可以重录 README 动画；录制器还需要 `PATH` 中已有 Chrome 和 `ffmpeg`。
+
+---
+
+## 项目结构
+
+```text
+SKILL.md                              Agent 工作流与硬边界
+assets/word_card.html                 博物馆风格 HTML 模板
+assets/vendor/mermaid.min.js          离线 Mermaid 运行时正本
+scripts/render_word_cards.py          JSON → HTML 渲染器
+scripts/record_showcase.py             可复现的 README GIF 录制器
+scripts/run_extreme_stress_test.py     桌面与移动端压力测试管线
+examples/showcase/                     日常词输入与展示 GIF
+examples/extreme-stress/input.json     6 个极限版式输入
+docs/                                  压测复现说明
+tests/                                 跨平台回归测试
+test-prompts.json                      标准 Agent 验收 prompt
 ```
 
-说明：
+---
 
-- 桌面端截图默认使用 Playwright Chromium + 本机 `chrome` channel。
-- 如果本机没有 Chrome，可运行 `python3 scripts/run_extreme_stress_test.py --desktop-channel none`，退回 Playwright 自带 Chromium。
-- 移动端截图使用 Playwright WebKit + `iPhone 14` 设备预设。
+## 运行要求
 
-## 示例截图
+- 支持仓库型 Agent Skills 的运行时，例如 Claude Code、Codex 或其他兼容环境。
+- 直接渲染和仓库测试需要 Python 3.10+。
+- 打开生成词卡不需要网络，也不需要 API key。
+- 可选：截图需要 npm + Playwright；重录 GIF 需要 Chrome + `ffmpeg`。
 
-### 桌面端
+---
 
-![Desktop stress sample](examples/extreme-stress/results/screenshots/desktop/word_card_floccinaucinihilipilification.png)
+## 致谢
 
-### 移动端
-
-![Mobile stress sample](examples/extreme-stress/results/screenshots/mobile/word_card_floccinaucinihilipilification.mobile.png)
-
-## 极限压测结果快照
-
-当前仓库内置并已完成截图验证的 6 个极限词：
-
-- `floccinaucinihilipilification`
-- `honorificabilitudinitatibus`
-- `psychoneuroendocrinological`
-- `thyroparathyroidectomized`
-- `otorhinolaryngological`
-- `deinstitutionalization`
-
-仓库内可直接查看的证据：
-
-- 输入集：`examples/extreme-stress/input.json`
-- HTML 输出：`examples/extreme-stress/results/html`
-- 桌面截图：`examples/extreme-stress/results/screenshots/desktop`
-- 移动端截图：`examples/extreme-stress/results/screenshots/mobile`
-- 摘要 JSON：`examples/extreme-stress/results/summary.json`
-- 文字说明：`docs/extreme-stress-results.zh-CN.md`
-
-## 输入结构
-
-基础必填字段仍然是：
-
-- `word`
-- `phonetic`
-- `definition_deep`
-- `etymology`
-- `nuance_text`
-- `example_sentence`
-- `epiphany`
-- `mermaid_code`
-
-其中 `etymology` 继续兼容原来的原始 HTML，旧数据不用迁移也能渲染。
-
-为了让“真实词块”和“整体义演化”更清楚地分开，渲染器现在额外支持这些可选结构化字段：
-
-- `etymology_origin` —— 构词公式，例如 `flocci + nauci + nihili + pili + -fication`
-- `etymology_formula` —— `etymology_origin` 的兼容别名
-- `etymology_origin_note` —— 对整条来源路径的简短说明
-- `etymology_chunks` —— 真实词块卡片数组；每项可含 `form`、`gloss`、`explanation`、可选 `role`
-- `etymology_development` —— “整体义怎么长出来”的阶段数组；每项可含 `label`、`title`、`explanation`、可选 `kind`
-- `etymology_cognates` —— 同族词卡片数组；每项可含 `term`、`note`、可选 `relation`
-
-当这些结构化字段存在时，渲染器会优先使用它们，而不是直接渲染原始 `etymology` HTML。这样像真实词块、语义推进、修辞效果这几层信息就不会再混成一片。
-
-如果结构化字段只覆盖了词源区的一部分，原来的 `etymology` HTML 不会被静默丢弃，而会保留在 `Additional Notes · 补充说明`。很短的补充说明默认展开，较长的说明默认折叠。
-
-单个词条：
-
-```json
-{
-  "word": "Excerpt",
-  "phonetic": "ˈek.sɝːpt",
-  "definition_deep": "<p>...</p>",
-  "etymology": "<p>...</p>",
-  "nuance_text": "<ul class=\"nuance-list\"><li class=\"nuance-item\">...</li></ul>",
-  "example_sentence": "She quoted a brief excerpt.",
-  "epiphany": "An excerpt is a chosen window. 摘录是被选择出来的一扇窗。",
-  "mermaid_code": "graph TD\\nA[whole text] --> B[selected passage]"
-}
-```
-
-带结构化词源字段的单词示例：
-
-```json
-{
-  "word": "Floccinaucinihilipilification",
-  "phonetic": "ˌflɒk.sɪ.nɔː.sɪˌnaɪ.hɪ.lɪˌpɪl.ɪ.fɪˈkeɪ.ʃən",
-  "definition_deep": "<p>...</p>",
-  "etymology": "<p>旧版兼容兜底 HTML。</p>",
-  "etymology_origin": "flocci + nauci + nihili + pili + -fication",
-  "etymology_origin_note": "多个表示“价值极低”的拉丁来源叠在一起，最后接名词后缀。",
-  "etymology_chunks": [
-    {
-      "form": "flocci",
-      "gloss": "of little value",
-      "explanation": "先把价值往下压一层。",
-      "role": "chunk"
-    }
-  ],
-  "etymology_development": [
-    {
-      "label": "Step 1",
-      "title": "semantic move",
-      "explanation": "多个低价值词块连续堆叠，强化“轻视”的判定动作。",
-      "kind": "meaning build-up"
-    }
-  ],
-  "etymology_cognates": [
-    {
-      "term": "nil",
-      "relation": "shared low-value idea",
-      "note": "现代英语里更直接的“零、无价值”回声。"
-    }
-  ],
-  "nuance_text": "<ul class=\"nuance-list\"><li class=\"nuance-item\">...</li></ul>",
-  "example_sentence": "He treated the objection with floccinaucinihilipilification.",
-  "epiphany": "A giant word can dramatize a tiny valuation. 冗长本身，也能参与轻视的语气。",
-  "mermaid_code": "graph TD\\nA[low value] --> B[stacked learned forms] --> C[performative dismissal]"
-}
-```
-
-多个词条：
-
-```json
-[
-  {
-    "word": "Excerpt",
-    "phonetic": "ˈek.sɝːpt",
-    "definition_deep": "<p>...</p>",
-    "etymology": "<p>...</p>",
-    "nuance_text": "<ul class=\"nuance-list\"><li class=\"nuance-item\">...</li></ul>",
-    "example_sentence": "She quoted a brief excerpt.",
-    "epiphany": "An excerpt is a chosen window. 摘录是被选择出来的一扇窗。",
-    "mermaid_code": "graph TD\\nA[whole text] --> B[selected passage]"
-  },
-  {
-    "word": "Serendipity",
-    "phonetic": "ˌser.ənˈdɪp.ə.ti",
-    "definition_deep": "<p>...</p>",
-    "etymology": "<p>...</p>",
-    "nuance_text": "<ul class=\"nuance-list\"><li class=\"nuance-item\">...</li></ul>",
-    "example_sentence": "Their meeting was pure serendipity.",
-    "epiphany": "Serendipity is chance meeting a prepared soul. 机缘是偶然遇见了有准备的灵魂。",
-    "mermaid_code": "graph TD\\nA[searching] --> B[finding]"
-  }
-]
-```
-
-## 输出
-
-- 单词输入 → 一个 `word_card_<slug>.html`
-- 多词输入 → 多个 HTML 词卡 + `word_cards_index.html`
+离线语义图使用 [Mermaid](https://mermaid.js.org/)；跨浏览器版式回放使用 [Playwright](https://playwright.dev/)。
 
 ## 许可证
 
-本仓库使用 `GPL-2.0-only` 许可，完整文本见 `LICENSE`。
+本仓库使用 [`GPL-2.0-only`](LICENSE) 许可。
+
+---
+
+<div align="center">
+
+*输入一句话，真正理解一个词，留下一张可以收藏的卡。*
+
+</div>
