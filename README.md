@@ -44,7 +44,7 @@ It is an Agent Skill first and a renderer second: your Agent develops the lingui
 | Nuance contrast | Why the word feels different from its nearest alternatives |
 | Semantic topology | A Mermaid graph from origin and core action to modern usage |
 | Bilingual epiphany | One English-Chinese line designed to make the word memorable |
-| Offline artifact | A self-contained local HTML card with no Mermaid CDN dependency |
+| Offline artifact | A local HTML card bundle with no Mermaid CDN dependency |
 
 One word produces one card. Multiple words produce multiple cards plus a local index page.
 
@@ -193,7 +193,7 @@ Generated HTML, screenshots, and summaries are gitignored to keep the checked-ou
 - [`docs/extreme-stress-results.md`](docs/extreme-stress-results.md)
 - [`tests/test_run_extreme_stress_test.py`](tests/test_run_extreme_stress_test.py)
 
-Re-record the README animation with `python scripts/record_showcase.py`. This recorder additionally needs Chrome and `ffmpeg` on `PATH`.
+Re-record the README animation with `python scripts/record_showcase.py`. This recorder additionally needs Chrome installed, with npm and `ffmpeg` available on `PATH`.
 
 ---
 
@@ -220,7 +220,7 @@ test-prompts.json                      Standard Agent acceptance prompts
 - An Agent runtime that supports repository-based Agent Skills, such as Claude Code, Codex, or another compatible runtime.
 - Python 3.10+ for direct rendering and repository tests.
 - No network connection or API key for opening generated cards.
-- Optional: npm + Playwright for screenshots; Chrome + `ffmpeg` for rebuilding the GIF.
+- Optional: npm + Playwright for screenshots; an installed Chrome browser plus `ffmpeg` on `PATH` for rebuilding the GIF.
 
 ---
 

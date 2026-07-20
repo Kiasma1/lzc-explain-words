@@ -193,7 +193,7 @@ python scripts/run_extreme_stress_test.py
 - [`docs/extreme-stress-results.zh-CN.md`](docs/extreme-stress-results.zh-CN.md)
 - [`tests/test_run_extreme_stress_test.py`](tests/test_run_extreme_stress_test.py)
 
-运行 `python scripts/record_showcase.py` 可以重录 README 动画；录制器还需要 `PATH` 中已有 Chrome 和 `ffmpeg`。
+运行 `python scripts/record_showcase.py` 可以重录 README 动画；录制器还需要已安装 Chrome，并能从 `PATH` 找到 npm 与 `ffmpeg`。
 
 ---
 
@@ -220,7 +220,7 @@ test-prompts.json                      标准 Agent 验收 prompt
 - 支持仓库型 Agent Skills 的运行时，例如 Claude Code、Codex 或其他兼容环境。
 - 直接渲染和仓库测试需要 Python 3.10+。
 - 打开生成词卡不需要网络，也不需要 API key。
-- 可选：截图需要 npm + Playwright；重录 GIF 需要 Chrome + `ffmpeg`。
+- 可选：截图需要 npm + Playwright；重录 GIF 需要已安装 Chrome，并能从 `PATH` 找到 `ffmpeg`。
 
 ---
 
