@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 
 DEFAULT_ROOT = Path("examples/extreme-stress")
+NPM_EXECUTABLE = shutil.which("npm") or "npm"
 
 
 def parse_args() -> argparse.Namespace:
@@ -54,7 +56,7 @@ def repo_root() -> Path:
 def render_cards(input_path: Path, html_dir: Path) -> list[Path]:
     script = repo_root() / "scripts" / "render_word_cards.py"
     subprocess.run(
-        ["python3", str(script), "--input", str(input_path), "--output-dir", str(html_dir)],
+        [sys.executable, str(script), "--input", str(input_path), "--output-dir", str(html_dir)],
         check=True,
     )
     return sorted(html_dir.glob("word_card_*.html"))
@@ -64,9 +66,16 @@ def file_url(path: Path) -> str:
     return path.resolve().as_uri()
 
 
+def path_for_summary(path: Path, root: Path) -> str:
+    try:
+        return str(path.relative_to(root))
+    except ValueError:
+        return str(path)
+
+
 def screenshot_desktop(html_path: Path, output_path: Path, wait_ms: int, channel: str) -> None:
     cmd = [
-        "npm",
+        NPM_EXECUTABLE,
         "exec",
         "--yes",
         "--package=playwright",
@@ -92,7 +101,7 @@ def screenshot_desktop(html_path: Path, output_path: Path, wait_ms: int, channel
 def screenshot_mobile(html_path: Path, output_path: Path, wait_ms: int, device: str) -> None:
     subprocess.run(
         [
-            "npm",
+            NPM_EXECUTABLE,
             "exec",
             "--yes",
             "--package=playwright",
@@ -151,9 +160,9 @@ def main() -> int:
         summary.append(
             {
                 "card": html_path.name,
-                "desktop_screenshot": str(desktop_path.relative_to(root)),
+                "desktop_screenshot": path_for_summary(desktop_path, root),
                 "desktop_size": {"width": desktop_size[0], "height": desktop_size[1]},
-                "mobile_screenshot": str(mobile_path.relative_to(root)),
+                "mobile_screenshot": path_for_summary(mobile_path, root),
                 "mobile_size": {"width": mobile_size[0], "height": mobile_size[1]},
             }
         )
@@ -162,8 +171,8 @@ def main() -> int:
     summary_path.write_text(
         json.dumps(
             {
-                "input": str(input_path.relative_to(root)),
-                "cards": [str(path.relative_to(root)) for path in cards],
+                "input": path_for_summary(input_path, root),
+                "cards": [path_for_summary(path, root) for path in cards],
                 "results": summary,
                 "desktop_channel": args.desktop_channel,
                 "mobile_device": args.mobile_device,
@@ -173,7 +182,7 @@ def main() -> int:
         ),
         encoding="utf-8",
     )
-    print(json.dumps({"summary": str(summary_path.relative_to(root)), "count": len(summary)}, ensure_ascii=False, indent=2))
+    print(json.dumps({"summary": path_for_summary(summary_path, root), "count": len(summary)}, ensure_ascii=False, indent=2))
     return 0
 
 
