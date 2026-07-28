@@ -86,6 +86,14 @@ class WordCardTemplateTests(unittest.TestCase):
         self.assertIn("navigator.clipboard", self.template)
         self.assertIn("document.execCommand('copy')", self.template)
 
+    def test_ready_helper_stops_polling_after_completion(self) -> None:
+        self.assertIn("let finished = false", self.rendered)
+        self.assertIn("if (finished) return", self.rendered)
+        self.assertIn("cancelAnimationFrame(frameId)", self.rendered)
+        self.assertIn("setTimeout(ready, 250)", self.rendered)
+        self.assertIn("setTimeout(finish, 4000)", self.rendered)
+        self.assertIn("{ once: true }", self.rendered)
+
     def test_visual_system_is_tokenized_and_accessible(self) -> None:
         root_end = self.template.index("\n  }\n\n  *")
         component_css_and_markup = self.template[root_end:]
@@ -94,6 +102,136 @@ class WordCardTemplateTests(unittest.TestCase):
         self.assertIn("@media (prefers-reduced-motion: reduce)", self.template)
         self.assertIn("@media print", self.template)
         self.assertIn(":focus-visible", self.template)
+
+    def test_motion_tokens_press_feedback_and_pointer_hover_are_scoped(self) -> None:
+        for declaration in (
+            "--duration-press: 160ms",
+            "--duration-state: 180ms",
+            "--ease-out: cubic-bezier(0.23, 1, 0.32, 1)",
+            "--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1)",
+        ):
+            self.assertIn(declaration, self.template)
+
+        self.assertIn(".action-button:active", self.template)
+        self.assertIn(".section-nav-link:active", self.template)
+        self.assertGreaterEqual(self.template.count("transform: scale(0.97)"), 2)
+        self.assertIn(
+            "@media (hover: hover) and (pointer: fine)", self.template
+        )
+        transition_declarations = re.findall(
+            r"transition(?:-property)?:\s*(.*?);",
+            self.template,
+            flags=re.DOTALL,
+        )
+        self.assertFalse(
+            any("box-shadow" in declaration for declaration in transition_declarations)
+        )
+
+    def test_reduced_motion_preserves_non_positional_feedback(self) -> None:
+        self.assertNotIn("transition-duration: 0.01ms", self.template)
+        self.assertIn(
+            "transition-property: background-color, border-color, color, opacity",
+            self.template,
+        )
+        self.assertIn(
+            ".skip-link {\n      transform: translateY(-160%) !important;",
+            self.template,
+        )
+        self.assertIn(
+            ".skip-link:focus {\n      transform: translateY(0) !important;",
+            self.template,
+        )
+        self.assertIn('content: "▴"', self.template)
+        self.assertIn(".section-nav-indicator {\n      transition: opacity 120ms ease;", self.template)
+        self.assertIn(".epiphany-box[data-reveal] {", self.template)
+        self.assertIn("transform: none;", self.template)
+
+    def test_reduced_transparency_uses_solid_materials(self) -> None:
+        self.assertIn(
+            "@media (prefers-reduced-transparency: reduce)", self.template
+        )
+        self.assertIn("-webkit-backdrop-filter: blur(14px)", self.template)
+        self.assertIn("-webkit-backdrop-filter: blur(16px)", self.template)
+        self.assertIn("backdrop-filter: none", self.template)
+        self.assertIn("-webkit-backdrop-filter: none", self.template)
+
+    def test_copy_feedback_is_interruptible_and_layout_stable(self) -> None:
+        self.assertIn("#copy-epiphany .action-label", self.template)
+        self.assertIn("min-inline-size: 8.5em", self.template)
+        self.assertIn("let copyRequestId = 0", self.template)
+        self.assertIn("window.clearTimeout(copyResetTimer)", self.template)
+        self.assertIn("copyLabelAnimation?.cancel()", self.template)
+        self.assertIn("const requestId = ++copyRequestId", self.template)
+        self.assertIn("if (requestId !== copyRequestId) return", self.template)
+        self.assertIn("{ opacity: 0.6, filter: 'blur(2px)' }", self.template)
+        self.assertIn("duration: 180", self.template)
+        self.assertIn("if (!reduceMotionQuery.matches)", self.template)
+
+    def test_etymology_notes_reveal_without_layout_animation(self) -> None:
+        self.assertIn(
+            "document.querySelectorAll('.etymology-supplement-details')",
+            self.template,
+        )
+        self.assertIn(
+            "content.getAnimations().forEach((animation) => animation.cancel())",
+            self.template,
+        )
+        self.assertIn("if (!details.open) return", self.template)
+        self.assertIn("duration: reduced ? 120 : 180", self.template)
+        self.assertIn("transform: 'translateY(-6px)'", self.template)
+        reveal_script = self.template.split(
+            "document.querySelectorAll('.etymology-supplement-details')", 1
+        )[1].split("const sectionNav", 1)[0]
+        self.assertNotRegex(reveal_script, r"\b(?:height|max-height|padding|margin)\b")
+
+    def test_section_navigation_has_one_semantic_shared_indicator(self) -> None:
+        self.assertEqual(1, self.template.count('class="section-nav-indicator"'))
+        self.assertIn('aria-hidden="true"', self.template)
+        self.assertEqual(
+            1,
+            len(
+                re.findall(
+                    r'<a class="section-nav-link"[^>]*aria-current="location"',
+                    self.template,
+                )
+            ),
+        )
+        self.assertIn("transform 220ms var(--ease-in-out)", self.template)
+        self.assertIn("width 220ms var(--ease-in-out)", self.template)
+        self.assertIn("link.offsetLeft", self.template)
+        self.assertIn("new ResizeObserver", self.template)
+        self.assertIn(
+            '.section-nav-link[aria-current="location"] {\n'
+            "    background: var(--color-text-primary);",
+            self.template,
+        )
+        self.assertIn(
+            '.section-nav.has-indicator .section-nav-link[aria-current="location"]',
+            self.template,
+        )
+        self.assertIn("sectionNav.classList.add('has-indicator')", self.template)
+        self.assertIn(
+            "if (sectionNav && navIndicator && initialCurrentLink)", self.template
+        )
+        self.assertIn("positionNavIndicator(initialCurrentLink, true)", self.template)
+
+    def test_epiphany_reveal_is_progressive_and_one_shot(self) -> None:
+        epiphany_markup = re.search(
+            r'<section class="epiphany-box"[^>]*>', self.template
+        )
+        self.assertIsNotNone(epiphany_markup)
+        self.assertNotIn("data-reveal", epiphany_markup.group(0))
+        self.assertIn('.epiphany-box[data-reveal="pending"]', self.template)
+        self.assertIn("transform: translateY(6px)", self.template)
+        self.assertIn("opacity 240ms var(--ease-out)", self.template)
+        self.assertIn(
+            "epiphany.getBoundingClientRect().top > window.innerHeight * 0.9",
+            self.template,
+        )
+        self.assertIn("window.location.hash !== '#epiphany'", self.template)
+        self.assertIn("rootMargin: '0px 0px -10% 0px'", self.template)
+        self.assertIn("threshold: 0.2", self.template)
+        self.assertIn("observer.disconnect()", self.template)
 
     def test_mermaid_diagrams_do_not_upscale_small_graphs(self) -> None:
         svg_rule = re.search(
@@ -154,6 +292,12 @@ class WordCardIndexTests(unittest.TestCase):
             ["word_card_serendipity.html", "word_card_lucid.html"], probe.links
         )
         self.assertIn("@media (prefers-reduced-motion: reduce)", document)
+        self.assertIn("@media (hover: hover) and (pointer: fine)", document)
+        self.assertIn("a:active", document)
+        self.assertIn("transform: scale(0.97)", document)
+        self.assertNotIn("transition-duration: 0.01ms", document)
+        self.assertIn("prefers-reduced-transparency: reduce", document)
+        self.assertIn("background: var(--color-paper-0)", document)
 
 
 if __name__ == "__main__":

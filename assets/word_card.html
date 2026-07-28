@@ -104,6 +104,10 @@
     --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
     --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     --font-mono: "SFMono-Regular", "Cascadia Code", "Menlo", "Consolas", monospace;
+    --duration-press: 160ms;
+    --duration-state: 180ms;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   * {
@@ -169,7 +173,7 @@
     color: var(--color-paper-0);
     font-weight: 700;
     text-decoration: none;
-    transition: transform 180ms ease;
+    transition: transform var(--duration-state) var(--ease-out);
   }
 
   .skip-link:focus {
@@ -203,6 +207,7 @@
     overflow: hidden;
     background: var(--surface);
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--color-border-subtle);
     box-shadow: var(--shadow-soft);
     border-radius: var(--radius-xl);
@@ -367,14 +372,20 @@
     line-height: 1;
     font-weight: 750;
     cursor: pointer;
-    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    transition:
+      transform var(--duration-press) var(--ease-out),
+      background-color var(--duration-state) ease,
+      border-color var(--duration-state) ease,
+      color var(--duration-state) ease;
   }
 
-  .action-button:hover {
-    border-color: var(--alpha-indigo-18);
-    background: var(--alpha-indigo-06);
-    color: var(--color-action);
-    box-shadow: 0 8px 20px var(--alpha-ink-08);
+  .action-button:active {
+    transform: scale(0.97);
+  }
+
+  #copy-epiphany .action-label {
+    min-inline-size: 8.5em;
+    text-align: center;
   }
 
   .action-button[data-state="success"] {
@@ -398,6 +409,7 @@
 
   .section-nav {
     position: sticky;
+    isolation: isolate;
     top: var(--space-3);
     z-index: 20;
     display: flex;
@@ -409,6 +421,7 @@
     background: var(--nav-bg);
     box-shadow: var(--nav-shadow);
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -418,6 +431,8 @@
   }
 
   .section-nav-link {
+    position: relative;
+    z-index: 1;
     min-height: var(--control-height);
     display: inline-flex;
     align-items: center;
@@ -430,13 +445,24 @@
     line-height: 1;
     text-decoration: none;
     white-space: nowrap;
-    transition: background-color 180ms ease, color 180ms ease;
+    transition:
+      transform var(--duration-press) var(--ease-out),
+      background-color var(--duration-state) ease,
+      border-color var(--duration-state) ease,
+      color var(--duration-state) ease;
   }
 
-  .section-nav-link:hover,
+  .section-nav-link:active {
+    transform: scale(0.97);
+  }
+
   .section-nav-link[aria-current="location"] {
     background: var(--color-text-primary);
     color: var(--color-paper-0);
+  }
+
+  .section-nav.has-indicator .section-nav-link[aria-current="location"] {
+    background: transparent;
   }
 
   .nav-index {
@@ -446,9 +472,42 @@
     letter-spacing: 0.04em;
   }
 
-  .section-nav-link:hover .nav-index,
   .section-nav-link[aria-current="location"] .nav-index {
     color: var(--color-indigo-100);
+  }
+
+  .section-nav-indicator {
+    position: absolute;
+    z-index: -1;
+    top: var(--space-2);
+    left: 0;
+    height: var(--control-height);
+    width: 0;
+    border-radius: var(--radius-pill);
+    background: var(--color-text-primary);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 220ms var(--ease-in-out),
+      width 220ms var(--ease-in-out),
+      opacity 120ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .action-button:hover {
+      border-color: var(--alpha-indigo-18);
+      background: var(--alpha-indigo-06);
+      color: var(--color-action);
+    }
+
+    .section-nav-link:hover {
+      background: var(--color-text-primary);
+      color: var(--color-paper-0);
+    }
+
+    .section-nav-link:hover .nav-index {
+      color: var(--color-indigo-100);
+    }
   }
 
   .content-stack {
@@ -788,7 +847,7 @@
     content: "▾";
     font-size: 12px;
     color: var(--color-text-muted);
-    transition: transform 180ms ease;
+    transition: transform var(--duration-state) var(--ease-in-out);
   }
 
   .etymology-supplement-details[open] .etymology-supplement-toggle::after {
@@ -1077,6 +1136,19 @@
     scroll-margin-top: 92px;
   }
 
+  .epiphany-box[data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .epiphany-box[data-reveal="revealed"] {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 240ms var(--ease-out),
+      transform 240ms var(--ease-out);
+  }
+
   .epiphany-box::before {
     content: "";
     position: absolute;
@@ -1259,12 +1331,58 @@
       scroll-behavior: auto;
     }
 
-    *,
-    *::before,
-    *::after {
-      scroll-behavior: auto !important;
-      transition-duration: 0.01ms !important;
-      transition-delay: 0ms !important;
+    .section-nav-link,
+    .action-button,
+    .etymology-supplement-toggle::after {
+      transform: none !important;
+    }
+
+    .skip-link {
+      transform: translateY(-160%) !important;
+      transition: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0) !important;
+    }
+
+    .etymology-supplement-toggle::after {
+      transition: none;
+    }
+
+    .etymology-supplement-details[open] .etymology-supplement-toggle::after {
+      content: "▴";
+    }
+
+    .action-button,
+    .section-nav-link {
+      transition-property: background-color, border-color, color, opacity;
+      transition-duration: var(--duration-state);
+      transition-timing-function: ease;
+    }
+
+    .section-nav-indicator {
+      transition: opacity 120ms ease;
+    }
+
+    .epiphany-box[data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    :root {
+      --color-surface-translucent: var(--color-paper-0);
+      --color-surface-muted: var(--color-paper-0);
+      --nav-bg: var(--color-paper-0);
+    }
+
+    .hero,
+    .section-nav {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
   }
 
@@ -1380,6 +1498,7 @@
   </header>
 
   <nav class="section-nav" aria-label="Word card sections" lang="en">
+    <span class="section-nav-indicator" aria-hidden="true"></span>
     <a class="section-nav-link" href="#meaning" aria-current="location"><span class="nav-index">01</span> Meaning</a>
     <a class="section-nav-link" href="#etymology"><span class="nav-index">02</span> Origin</a>
     <a class="section-nav-link" href="#nuance"><span class="nav-index">03</span> Nuance</a>
@@ -1580,6 +1699,10 @@
   const copyButtonLabel = copyButton?.querySelector('.action-label');
   const copyStatus = document.querySelector('#copy-status');
   const epiphanyText = document.querySelector('.epiphany-text');
+  const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let copyRequestId = 0;
+  let copyResetTimer = 0;
+  let copyLabelAnimation = null;
 
   const copyTextFallback = (text) => {
     const textArea = document.createElement('textarea');
@@ -1604,8 +1727,34 @@
     }
   };
 
+  const setCopyState = (state, label, message) => {
+    window.clearTimeout(copyResetTimer);
+    copyLabelAnimation?.cancel();
+
+    copyButton.dataset.state = state;
+    copyButtonLabel.textContent = label;
+    if (copyStatus) {
+      copyStatus.textContent = message;
+    }
+
+    if (!reduceMotionQuery.matches) {
+      copyLabelAnimation = copyButtonLabel.animate(
+        [
+          { opacity: 0.6, filter: 'blur(2px)' },
+          { opacity: 1, filter: 'blur(0)' }
+        ],
+        {
+          duration: 180,
+          easing: 'ease',
+          fill: 'both'
+        }
+      );
+    }
+  };
+
   if (copyButton && copyButtonLabel && epiphanyText) {
     copyButton.addEventListener('click', async () => {
+      const requestId = ++copyRequestId;
       const text = epiphanyText.textContent.trim();
       let copied = false;
 
@@ -1620,25 +1769,91 @@
         copied = copyTextFallback(text);
       }
 
-      copyButton.dataset.state = copied ? 'success' : 'error';
-      copyButtonLabel.textContent = copied ? 'Copied' : 'Copy failed';
-      if (copyStatus) {
-        copyStatus.textContent = copied
-          ? 'Epiphany copied to clipboard.'
-          : 'Could not copy the Epiphany. Select the text manually.';
-      }
+      if (requestId !== copyRequestId) return;
 
-      window.setTimeout(() => {
-        copyButton.dataset.state = 'idle';
-        copyButtonLabel.textContent = 'Copy Epiphany';
+      setCopyState(
+        copied ? 'success' : 'error',
+        copied ? 'Copied' : 'Copy failed',
+        copied
+          ? 'Epiphany copied to clipboard.'
+          : 'Could not copy the Epiphany. Select the text manually.'
+      );
+
+      copyResetTimer = window.setTimeout(() => {
+        setCopyState('idle', 'Copy Epiphany', '');
       }, 1800);
     });
   }
 
+  document.querySelectorAll('.etymology-supplement-details').forEach((details) => {
+    const content = details.querySelector('.etymology-supplement');
+    if (!content) return;
+
+    details.addEventListener('toggle', () => {
+      content.getAnimations().forEach((animation) => animation.cancel());
+      if (!details.open) return;
+
+      const reduced = reduceMotionQuery.matches;
+      content.animate(
+        reduced
+          ? [{ opacity: 0.6 }, { opacity: 1 }]
+          : [
+              { opacity: 0, transform: 'translateY(-6px)' },
+              { opacity: 1, transform: 'translateY(0)' }
+            ],
+        {
+          duration: reduced ? 120 : 180,
+          easing: 'cubic-bezier(0.23, 1, 0.32, 1)'
+        }
+      );
+    });
+  });
+
+  const sectionNav = document.querySelector('.section-nav');
+  const navIndicator = document.querySelector('.section-nav-indicator');
   const navLinks = [...document.querySelectorAll('.section-nav-link')];
   const observedSections = navLinks
     .map((link) => document.querySelector(link.getAttribute('href')))
     .filter(Boolean);
+
+  const positionNavIndicator = (link, immediate = false) => {
+    if (!sectionNav || !navIndicator || !link) return;
+    navIndicator.style.transitionDuration = immediate && !reduceMotionQuery.matches
+      ? '0ms'
+      : '';
+    navIndicator.style.width = `${link.offsetWidth}px`;
+    navIndicator.style.transform = `translateX(${link.offsetLeft}px)`;
+    navIndicator.style.opacity = '1';
+    if (immediate && !reduceMotionQuery.matches) {
+      requestAnimationFrame(() => {
+        navIndicator.style.transitionDuration = '';
+      });
+    }
+  };
+
+  const setCurrentNavLink = (sectionId, immediate = false) => {
+    let currentLink = null;
+
+    navLinks.forEach((link) => {
+      const isCurrent = link.getAttribute('href') === `#${sectionId}`;
+      if (isCurrent) {
+        link.setAttribute('aria-current', 'location');
+        currentLink = link;
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    positionNavIndicator(currentLink, immediate);
+  };
+
+  const initialCurrentLink = navLinks.find(
+    (link) => link.getAttribute('aria-current') === 'location'
+  );
+  if (sectionNav && navIndicator && initialCurrentLink) {
+    sectionNav.classList.add('has-indicator');
+    positionNavIndicator(initialCurrentLink, true);
+  }
 
   if ('IntersectionObserver' in window && observedSections.length) {
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -1648,20 +1863,45 @@
 
       if (!activeEntry) return;
 
-      navLinks.forEach((link) => {
-        const isCurrent = link.getAttribute('href') === `#${activeEntry.target.id}`;
-        if (isCurrent) {
-          link.setAttribute('aria-current', 'location');
-        } else {
-          link.removeAttribute('aria-current');
-        }
-      });
+      setCurrentNavLink(activeEntry.target.id);
     }, {
       rootMargin: '-18% 0px -58% 0px',
       threshold: [0.05, 0.25, 0.5]
     });
 
     observedSections.forEach((section) => sectionObserver.observe(section));
+  }
+
+  if ('ResizeObserver' in window && sectionNav) {
+    const navResizeObserver = new ResizeObserver(() => {
+      const currentLink = navLinks.find(
+        (link) => link.getAttribute('aria-current') === 'location'
+      );
+      positionNavIndicator(currentLink, true);
+    });
+    navResizeObserver.observe(sectionNav);
+  }
+
+  const epiphany = document.querySelector('.epiphany-box');
+
+  if (
+    epiphany
+    && 'IntersectionObserver' in window
+    && !reduceMotionQuery.matches
+    && window.location.hash !== '#epiphany'
+    && epiphany.getBoundingClientRect().top > window.innerHeight * 0.9
+  ) {
+    epiphany.dataset.reveal = 'pending';
+    const epiphanyObserver = new IntersectionObserver((entries, observer) => {
+      const entry = entries.find((item) => item.isIntersecting);
+      if (!entry) return;
+      epiphany.dataset.reveal = 'revealed';
+      observer.disconnect();
+    }, {
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.2
+    });
+    epiphanyObserver.observe(epiphany);
   }
 
   const themeStyle = getComputedStyle(document.documentElement);

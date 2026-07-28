@@ -77,18 +77,29 @@ def inject_ready_script(document: str) -> str:
         return document
     snippet = """<script>
   (function waitForCardReady() {
+    let frameId = 0;
+    let finished = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      if (frameId) cancelAnimationFrame(frameId);
+      document.body.setAttribute('data-card-ready', '1');
+    };
+
     const ready = () => {
+      if (finished) return;
       if (document.querySelector('.mermaid svg')) {
-        document.body.setAttribute('data-card-ready', '1');
+        finish();
       } else {
-        requestAnimationFrame(ready);
+        frameId = requestAnimationFrame(ready);
       }
     };
-    const fallback = () => document.body.setAttribute('data-card-ready', '1');
+
     window.addEventListener('load', () => {
       setTimeout(ready, 250);
-      setTimeout(fallback, 4000);
-    });
+      setTimeout(finish, 4000);
+    }, { once: true });
   })();
 </script>
 </body>"""
@@ -313,6 +324,10 @@ def build_index(entries: list[dict[str, Any]], outputs: list[Path]) -> str:
       --font-mono: "SFMono-Regular", "Cascadia Code", "Menlo", monospace;
       --radius-lg: 22px;
       --radius-xl: 30px;
+      --duration-press: 160ms;
+      --duration-state: 180ms;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     }}
     * {{
       box-sizing: border-box;
@@ -391,12 +406,13 @@ def build_index(entries: list[dict[str, Any]], outputs: list[Path]) -> str:
       color: var(--color-ink-950);
       text-decoration: none;
       box-shadow: 0 10px 28px var(--color-shadow);
-      transition: border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+      transition:
+        transform var(--duration-press) var(--ease-out),
+        border-color var(--duration-state) ease,
+        color var(--duration-state) ease;
     }}
-    a:hover {{
-      border-color: var(--color-indigo-600);
-      color: var(--color-indigo-700);
-      box-shadow: 0 16px 34px var(--color-shadow);
+    a:active {{
+      transform: scale(0.97);
     }}
     a:focus-visible {{
       outline: 3px solid var(--color-indigo-600);
@@ -443,9 +459,24 @@ def build_index(entries: list[dict[str, Any]], outputs: list[Path]) -> str:
         grid-column: 2;
       }}
     }}
+    @media (hover: hover) and (pointer: fine) {{
+      a:hover {{
+        border-color: var(--color-indigo-600);
+        color: var(--color-indigo-700);
+      }}
+    }}
     @media (prefers-reduced-motion: reduce) {{
-      * {{
-        transition-duration: 0.01ms !important;
+      a {{
+        transform: none !important;
+        transition:
+          border-color var(--duration-state) ease,
+          color var(--duration-state) ease,
+          opacity var(--duration-state) ease;
+      }}
+    }}
+    @media (prefers-reduced-transparency: reduce) {{
+      header {{
+        background: var(--color-paper-0);
       }}
     }}
   </style>
