@@ -77,18 +77,29 @@ def inject_ready_script(document: str) -> str:
         return document
     snippet = """<script>
   (function waitForCardReady() {
+    let frameId = 0;
+    let finished = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      if (frameId) cancelAnimationFrame(frameId);
+      document.body.setAttribute('data-card-ready', '1');
+    };
+
     const ready = () => {
+      if (finished) return;
       if (document.querySelector('.mermaid svg')) {
-        document.body.setAttribute('data-card-ready', '1');
+        finish();
       } else {
-        requestAnimationFrame(ready);
+        frameId = requestAnimationFrame(ready);
       }
     };
-    const fallback = () => document.body.setAttribute('data-card-ready', '1');
+
     window.addEventListener('load', () => {
       setTimeout(ready, 250);
-      setTimeout(fallback, 4000);
-    });
+      setTimeout(finish, 4000);
+    }, { once: true });
   })();
 </script>
 </body>"""
@@ -165,7 +176,10 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
     parts: list[str] = []
 
     if origin_formula or origin_note:
-        origin_html = ['<section class="etymology-origin">', '<span class="etymology-kicker">Origin Formula · 构词公式</span>']
+        origin_html = [
+            '<section class="etymology-origin" aria-labelledby="origin-formula-heading">',
+            '<h3 class="etymology-kicker" id="origin-formula-heading">Origin Formula · 构词公式</h3>',
+        ]
         if origin_formula:
             origin_html.append(f'<div class="etymology-origin-formula">{html.escape(origin_formula)}</div>')
         if origin_note:
@@ -183,14 +197,14 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
             chunk_cards.append(
                 "<article class=\"etymology-chunk-card\">"
                 + (f"<span class=\"etymology-chip\">{role}</span>" if role else "")
-                + f"<h3>{form}</h3>"
+                + f"<h4>{form}</h4>"
                 + (f"<p class=\"etymology-chunk-gloss\">{gloss}</p>" if gloss else "")
                 + (f"<p class=\"etymology-chunk-note\">{explanation}</p>" if explanation else "")
                 + "</article>"
             )
         parts.append(
-            "<section class=\"etymology-group\">"
-            "<span class=\"etymology-kicker\">Word Chunks · 词块对应</span>"
+            "<section class=\"etymology-group\" aria-labelledby=\"word-chunks-heading\">"
+            "<h3 class=\"etymology-kicker\" id=\"word-chunks-heading\">Word Chunks · 词块对应</h3>"
             "<div class=\"etymology-chunk-grid\">"
             + "".join(chunk_cards)
             + "</div></section>"
@@ -207,13 +221,13 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
                 "<article class=\"etymology-development-card\">"
                 + (f"<span class=\"etymology-chip\">{kind}</span>" if kind else "")
                 + (f"<span class=\"stage-label\">{label}</span>" if label else "")
-                + (f"<h3>{title}</h3>" if title else "")
+                + (f"<h4>{title}</h4>" if title else "")
                 + (f"<p>{explanation}</p>" if explanation else "")
                 + "</article>"
             )
         parts.append(
-            "<section class=\"etymology-group\">"
-            "<span class=\"etymology-kicker\">Meaning Build-up · 整体义怎么长出来</span>"
+            "<section class=\"etymology-group\" aria-labelledby=\"meaning-build-up-heading\">"
+            "<h3 class=\"etymology-kicker\" id=\"meaning-build-up-heading\">Meaning Build-up · 整体义怎么长出来</h3>"
             "<div class=\"etymology-development-list\">"
             + "".join(dev_cards)
             + "</div></section>"
@@ -228,14 +242,14 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
             cognate_cards.append(
                 "<article class=\"etymology-cognate-card family-mini\">"
                 "<span class=\"family-label\">Family · 同族词</span>"
-                + (f"<h3>{term}</h3>" if term else "")
+                + (f"<h4>{term}</h4>" if term else "")
                 + (f"<p class=\"cognate-relation\">{relation}</p>" if relation else "")
                 + (f"<p>{note}</p>" if note else "")
                 + "</article>"
             )
         parts.append(
-            "<section class=\"etymology-group\">"
-            "<span class=\"etymology-kicker\">Cognates · 同族词</span>"
+            "<section class=\"etymology-group\" aria-labelledby=\"cognates-heading\">"
+            "<h3 class=\"etymology-kicker\" id=\"cognates-heading\">Cognates · 同族词</h3>"
             "<div class=\"etymology-cognate-list\">"
             + "".join(cognate_cards)
             + "</div></section>"
@@ -245,7 +259,7 @@ def render_structured_etymology(entry: dict[str, Any]) -> str | None:
     if has_structured_gaps and has_meaningful_etymology_html(raw_etymology):
         open_attr = " open" if supplement_should_start_open(raw_etymology) else ""
         parts.append(
-            "<section class=\"etymology-group etymology-supplement-group\">"
+            "<section class=\"etymology-group etymology-supplement-group\" aria-label=\"Additional etymology notes\">"
             + f"<details class=\"etymology-supplement-details\"{open_attr}>"
             "<summary class=\"etymology-supplement-summary\">"
             "<span class=\"etymology-kicker\">Additional Notes · 补充说明</span>"
@@ -274,62 +288,209 @@ def render_entry(template: str, entry: dict[str, Any]) -> str:
 
 def build_index(entries: list[dict[str, Any]], outputs: list[Path]) -> str:
     items = []
-    for entry, output in zip(entries, outputs):
+    for position, (entry, output) in enumerate(zip(entries, outputs), start=1):
         items.append(
-            f"<li><a href=\"{html.escape(output.name)}\">{html.escape(entry['word'])}</a></li>"
+            "<li>"
+            f"<a href=\"{html.escape(output.name)}\">"
+            f"<span class=\"card-number\" aria-hidden=\"true\">{position:02d}</span>"
+            f"<span class=\"card-name\" lang=\"en\">{html.escape(entry['word'])}</span>"
+            "<span class=\"card-cta\" lang=\"en\">Open card</span>"
+            "</a>"
+            "</li>"
         )
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Word Cards</title>
+  <title>Word Card Collection</title>
   <style>
+    :root {{
+      --color-paper-0: #ffffff;
+      --color-paper-50: #fbfaf7;
+      --color-paper-100: #f4f0e8;
+      --color-ink-950: #171717;
+      --color-ink-700: #44403c;
+      --color-ink-500: #78716c;
+      --color-indigo-700: #3730a3;
+      --color-indigo-600: #4f46e5;
+      --color-border: rgba(23, 23, 23, 0.12);
+      --color-border-subtle: rgba(23, 23, 23, 0.08);
+      --color-shadow: rgba(23, 23, 23, 0.08);
+      --color-surface-translucent: rgba(255, 255, 255, 0.88);
+      --color-indigo-soft: rgba(79, 70, 229, 0.06);
+      --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "SFMono-Regular", "Cascadia Code", "Menlo", monospace;
+      --radius-lg: 22px;
+      --radius-xl: 30px;
+      --duration-press: 160ms;
+      --duration-state: 180ms;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    }}
+    * {{
+      box-sizing: border-box;
+    }}
     body {{
       margin: 0;
-      padding: 40px 24px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
-      color: #111827;
+      min-height: 100vh;
+      padding: 40px 20px 64px;
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at 12% 0%, var(--color-indigo-soft), transparent 30%),
+        linear-gradient(180deg, var(--color-paper-50), var(--color-paper-100));
+      color: var(--color-ink-950);
     }}
     main {{
-      max-width: 760px;
+      max-width: 900px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid rgba(17,24,39,0.08);
-      border-radius: 24px;
-      padding: 28px;
-      box-shadow: 0 12px 32px rgba(15,23,42,0.08);
+    }}
+    header {{
+      padding: 32px;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-xl);
+      background: var(--color-surface-translucent);
+      box-shadow: 0 18px 48px var(--color-shadow);
     }}
     h1 {{
-      margin: 0 0 12px;
-      font-size: clamp(30px, 5vw, 48px);
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(38px, 7vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.035em;
     }}
-    p {{
-      color: #4b5563;
+    header p {{
+      max-width: 620px;
+      margin: 16px 0 0;
+      color: var(--color-ink-700);
+      font-family: var(--font-serif);
+      font-size: 18px;
       line-height: 1.7;
     }}
-    ul {{
-      margin: 24px 0 0;
-      padding-left: 20px;
+    .collection-meta {{
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      margin-bottom: 18px;
+      padding: 4px 12px;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 999px;
+      color: var(--color-ink-500);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }}
-    li + li {{
-      margin-top: 12px;
+    ol {{
+      display: grid;
+      gap: 12px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }}
+    li {{
+      min-width: 0;
     }}
     a {{
-      color: #1d4ed8;
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 18px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-paper-0);
+      color: var(--color-ink-950);
       text-decoration: none;
-      font-weight: 600;
+      box-shadow: 0 10px 28px var(--color-shadow);
+      transition:
+        transform var(--duration-press) var(--ease-out),
+        border-color var(--duration-state) ease,
+        color var(--duration-state) ease;
+    }}
+    a:active {{
+      transform: scale(0.97);
+    }}
+    a:focus-visible {{
+      outline: 3px solid var(--color-indigo-600);
+      outline-offset: 3px;
+    }}
+    .card-number {{
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--color-indigo-soft);
+      color: var(--color-indigo-700);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+    }}
+    .card-name {{
+      overflow-wrap: anywhere;
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+    }}
+    .card-cta {{
+      color: var(--color-ink-500);
+      font-size: 12px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }}
+    @media (max-width: 640px) {{
+      body {{
+        padding: 12px 12px 40px;
+      }}
+      header {{
+        padding: 24px 20px;
+        border-radius: var(--radius-lg);
+      }}
+      a {{
+        grid-template-columns: auto minmax(0, 1fr);
+      }}
+      .card-cta {{
+        grid-column: 2;
+      }}
+    }}
+    @media (hover: hover) and (pointer: fine) {{
+      a:hover {{
+        border-color: var(--color-indigo-600);
+        color: var(--color-indigo-700);
+      }}
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      a {{
+        transform: none !important;
+        transition:
+          border-color var(--duration-state) ease,
+          color var(--duration-state) ease,
+          opacity var(--duration-state) ease;
+      }}
+    }}
+    @media (prefers-reduced-transparency: reduce) {{
+      header {{
+        background: var(--color-paper-0);
+      }}
     }}
   </style>
 </head>
 <body>
   <main>
-    <h1>Word Cards</h1>
-    <p>已根据本次输入生成以下词卡：</p>
-    <ul>
+    <header>
+      <span class="collection-meta">{len(items):02d} cards · 词卡合集</span>
+      <h1 lang="en">Word Card Collection</h1>
+      <p>按输入顺序打开每一张双语词卡，从核心语义一路看到词源、语感与结构拓扑。</p>
+    </header>
+    <ol aria-label="Generated word cards">
       {''.join(items)}
-    </ul>
+    </ol>
   </main>
 </body>
 </html>"""
